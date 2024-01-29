@@ -63,17 +63,12 @@ EXEC Usp_InsertNewRecord @EmpName='Aman', @Birthdate='2002-11-16', @DesignationI
 GO
 CREATE PROCEDURE Usp_UpdateEmployeeList
   @EmployeeID INT,
-  @NewEmpName VARCHAR(50),
-  @NewBirthdate DATE,
-  @NewDesignationID INT,
-  @NewGender INT,
-  @NewEmailID VARCHAR(50),
-  @NewMobNO VARCHAR(20)
+  @NewEmpName VARCHAR(50)
 AS
 BEGIN
 --- SQL Query {
 UPDATE Employee 
-SET EmpName=@NewEmpName, Birthdate=@NewBirthdate, DesignationID=@NewDesignationID, Gender=@NewGender, EmailID=@NewEmailID, MobNO=@NewMobNO 
+SET EmpName=@NewEmpName
 WHERE EmpID=@EmployeeID;
 --- SQL Query Closed }
 END;
@@ -87,6 +82,7 @@ EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
 GO
 CREATE PROCEDURE Usp_GetEmployeeDetails
   @EmployeeID INT
+AS
 BEGIN
 --- SQL Query {
 SELECT EmpName, DesignationName, EmailID, MobNO 
