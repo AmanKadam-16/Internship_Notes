@@ -78,7 +78,7 @@ WHERE ID=@EmployeeID;
 --- SQL Query Closed }
 END;
 
-EXEC Usp_UpdateEmployeeList @EmployeeID=1, @EmpName='Code_RED';
+EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
 ```
 
 ### Stored Procedure-3 for Deleting Employee Record
