@@ -5,10 +5,10 @@
 
 ```sql
 --- Creating Database
-CREATE DATABASE EmployeeDB;
+CREATE DATABASE EmployeeDB_1;
 
 --- Use Database
-USE EmployeeDB;
+USE EmployeeDB_1;
 
 --- Create Table - 1
 CREATE TABLE MasterDesignation(
@@ -23,7 +23,7 @@ INSERT INTO MasterDesignation (DesignationName) VALUES ('Analyst');
 
 --- Create Table - 2
 CREATE TABLE Employee(
-  ID INT PRIMARY KEY IDENTITY(1,1),
+  EmpID INT PRIMARY KEY IDENTITY(1,1),
   EmpName VARCHAR(50),
   Birthdate DATE,
   DesignationID INT FOREIGN KEY REFERENCES MasterDesignation(ID),
@@ -74,30 +74,14 @@ BEGIN
 --- SQL Query {
 UPDATE Employee 
 SET EmpName=@NewEmpName, Birthdate=@NewBirthdate, DesignationID=@NewDesignationID, Gender=@NewGender, EmailID=@NewEmailID, MobNO=@NewMobNO 
-WHERE ID=@EmployeeID;
+WHERE EmpID=@EmployeeID;
 --- SQL Query Closed }
 END;
 
 EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
 ```
 
-### Stored Procedure-3 for Deleting Employee Record
-
-```sql
-GO
-CREATE PROCEDURE Usp_DeleteEmployeeDetails 
-  @EmployeeID INT
-AS
-BEGIN
---- SQL Query {
-DELETE FROM Employee WHERE ID=@EmployeeID;
---- SQL Query Closed }
-END;
-
-EXEC Usp_DeleteEmployeeDetails @EmployeeID=1;
-```
-
-### Stored Procedure-4 for Displaying Employee Record
+### Stored Procedure-3 for Displaying Employee Record
 
 ```sql
 GO
@@ -107,10 +91,26 @@ BEGIN
 --- SQL Query {
 SELECT EmpName, DesignationName, EmailID, MobNO 
 FROM Employee
-INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE ID=@EmployeeID;
+INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE EmpID=@EmployeeID;
 --- SQL Query Closed }
 END;
 
 EXEC Usp_GetEmployeeDetails @EmployeeID=1;
+```
+
+### Stored Procedure-4 for Deleting Employee Record
+
+```sql
+GO
+CREATE PROCEDURE Usp_DeleteEmployeeDetails 
+  @EmployeeID INT
+AS
+BEGIN
+--- SQL Query {
+DELETE FROM Employee WHERE EmpID=@EmployeeID;
+--- SQL Query Closed }
+END;
+
+EXEC Usp_DeleteEmployeeDetails @EmployeeID=1;
 ```
 / / C O D E  _  R E D
