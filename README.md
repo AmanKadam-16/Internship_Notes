@@ -1,45 +1,124 @@
-# Agile Software Development
+# SQL Task | EmployeeDB
+# Total 5 Stored Procedures based on task / PDF
+##### By Aman Kadam
+##### Problem Statement Snapshot
+![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/SQL-Task-%7C-Notes-%7C-Queries/Task-Practical.jpg)
+## Database and Tables Creation
 
-Agile is a software development methodology that prioritizes adaptability and collaboration throughout the development process. Unlike traditional waterfall models, where progress is linear and milestones are predefined, agile allows for iterative and incremental development.
+```sql
+--- Creating Database
+CREATE DATABASE EmployeeDB_1;
 
-## Principles of Agile:
+--- Use Database
+USE EmployeeDB_1;
 
-### 1. **Individuals and Interactions over Processes and Tools:**
-   Agile values communication and collaboration among team members. While tools are essential, the emphasis is on human interaction to drive project success.
+--- Create Table - 1
+CREATE TABLE MasterDesignation(
+  ID INT PRIMARY KEY IDENTITY(1,1),
+  DesignationName VARCHAR(30),
+);
 
-### 2. **Working Software over Comprehensive Documentation:**
-   Agile prioritizes delivering a functional product over extensive documentation. Documentation is still important, but it's streamlined to focus on the essentials.
+--- Inserting Designations into MasterDesignation Table
+INSERT INTO MasterDesignation (DesignationName) VALUES ('Manager');
+INSERT INTO MasterDesignation (DesignationName) VALUES ('Developer');
+INSERT INTO MasterDesignation (DesignationName) VALUES ('Analyst');
 
-### 3. **Customer Collaboration over Contract Negotiation:**
-   Agile encourages customer involvement throughout development. Regular feedback from customers helps teams adapt quickly to changing requirements.
+--- Create Table - 2
+CREATE TABLE Employee(
+  EmpID INT PRIMARY KEY IDENTITY(1,1),
+  EmpName VARCHAR(50),
+  Birthdate DATE,
+  DesignationID INT FOREIGN KEY REFERENCES MasterDesignation(ID),
+  Gender INT,
+  EmailID VARCHAR(50),
+  MobNO VARCHAR(20),
+);
+```
 
-### 4. **Responding to Change over Following a Plan:**
-   Agile recognizes the dynamic nature of software development. Teams are encouraged to respond to changing requirements, even late in the development process.
+## Creating Stored Procedures
 
-## Key Concepts:
+### Stored Procedure-1 for Inserting Employee Record
 
-### 1. **User Stories:**
-   Agile projects often use user stories to define features from an end-user perspective. These stories guide development and help prioritize tasks.
+```sql
+GO
+CREATE PROCEDURE Usp_InsertNewRecord
+  @EmpName VARCHAR(50),
+  @Birthdate DATE,
+  @DesignationID INT,
+  @Gender INT,
+  @EmailID VARCHAR(50),
+  @MobNO VARCHAR(20)
+AS
+BEGIN
+--- SQL Query {
+INSERT INTO Employee(EmpName, Birthdate, DesignationID, Gender, EmailID, MobNO)
+VALUES(@EmpName, @Birthdate, @DesignationID, @Gender, @EmailID, @MobNO);
+--- SQL Query Closed }
+END;
 
-### 2. **Sprints:**
-   Development work is divided into time-boxed iterations called sprints, usually two to four weeks long. At the end of each sprint, a potentially shippable product increment is delivered.
+EXEC Usp_InsertNewRecord @EmpName='Aman', @Birthdate='2002-11-16', @DesignationID=1, @Gender=1, @EmailID='aman@gmail.com', @MobNo='2748731798';
+```
 
-### 3. **Scrum and Kanban:**
-   Scrum and Kanban are popular frameworks within agile. Scrum employs fixed-length iterations, while Kanban focuses on continuous delivery without fixed time frames.
+### Stored Procedure-2 for Updating Employee Record
 
-### 4. **Daily Stand-ups:**
-   Agile teams hold daily stand-up meetings to discuss progress, challenges, and plans. This promotes transparency and quick issue resolution.
+```sql
+GO
+CREATE PROCEDURE Usp_UpdateEmployeeList
+  @EmployeeID INT,
+  @NewEmpName VARCHAR(50)
+AS
+BEGIN
+--- SQL Query {
+UPDATE Employee 
+SET EmpName=@NewEmpName
+WHERE EmpID=@EmployeeID;
+--- SQL Query Closed }
+END;
 
-## Benefits of Agile:
+EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
+```
 
-- **Flexibility:** Easily adapts to changing requirements.
-  
-- **Customer Satisfaction:** Regular feedback ensures the end product meets customer expectations.
+### Stored Procedure-3 for Displaying Employee Record
 
-- **Faster Time-to-Market:** Incremental development allows for quicker releases.
+```sql
+GO
+CREATE PROCEDURE Usp_GetEmployeeDetails
+  @EmployeeID INT
+AS
+BEGIN
+--- SQL Query {
+SELECT EmpName, DesignationName, EmailID, MobNO 
+FROM Employee
+INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE EmpID=@EmployeeID;
+--- SQL Query Closed }
+END;
 
-- **Collaborative Environment:** Emphasizes teamwork and communication.
+EXEC Usp_GetEmployeeDetails @EmployeeID=1;
+```
 
-In summary, agile methodologies offer a dynamic and customer-centric approach to software development, promoting a more responsive and collaborative development process.
+### Stored Procedure-4 for Deleting Employee Record
 
-// C O D E  _  R E D
+```sql
+GO
+CREATE PROCEDURE Usp_DeleteEmployeeDetails 
+  @EmployeeID INT
+AS
+BEGIN
+--- SQL Query {
+DELETE FROM Employee WHERE EmpID=@EmployeeID;
+--- SQL Query Closed }
+END;
+
+EXEC Usp_DeleteEmployeeDetails @EmployeeID=1;
+```
+### Stored Procedure-5 for Dropdown Of Designation Names
+``` SQL
+GO
+CREATE PROCEDURE Usp_MasterDesignation
+AS 
+BEGIN
+SELECT * FROM MasterDesignation;
+END
+EXEC Usp_MasterDesignation;
+```
+/ / C O D E  _  R E D
