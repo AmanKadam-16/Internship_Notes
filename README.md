@@ -1,6 +1,6 @@
 # Greetings, I'm Aman! 👋
 
-Welcome to my GitHub repository where I've documented my 6-month internship journey at Aadi Technology. 🚀
+Welcome to my GitHub repository where I am documenting my 6-month internship journey at Aadi Technology. 🚀
 
 ## Repository Overview
 
