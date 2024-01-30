@@ -13,3 +13,6 @@ I've put effort into organizing and sharing my learnings, and I'd love to hear f
 ## Happy Coding! 💻
 
 Thank you for taking the time to visit my repository. I hope you enjoy the content and find it beneficial for your own journey. Happy coding! 💻
+***
+![MasterHead](https://user-images.githubusercontent.com/86270481/214122618-1bf43327-cdef-456e-81fe-fc71a9070c07.gif)
+// C O D E  _  R E D
