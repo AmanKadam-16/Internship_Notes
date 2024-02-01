@@ -1,124 +1,138 @@
-# SQL Task | EmployeeDB
+# SQL Task | Task Assignment Module
 # Total 5 Stored Procedures based on task / PDF
 ##### By Aman Kadam
 ##### Problem Statement Snapshot
-![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/SQL-Task-%7C-Notes-%7C-Queries/Task-Practical.jpg)
-## Database and Tables Creation
+![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/02-SQL-Task-%7C-Notes-%7C-Queries/Task-Practical.jpg)
+## Tables Schema
+![SS of Schema](https://github.com/AmanKadam-16/Internship_Notes/blob/02-SQL-Task-%7C-Notes-%7C-Queries/Database-Diagram.jpg)
 
+## Creating Database
 ```sql
---- Creating Database
-CREATE DATABASE EmployeeDB_1;
+CREATE DATABASE TaskDB;
+```
 
---- Use Database
-USE EmployeeDB_1;
+## Use Database
+```sql
+USE TaskDB;
+```
 
---- Create Table - 1
-CREATE TABLE MasterDesignation(
-  ID INT PRIMARY KEY IDENTITY(1,1),
-  DesignationName VARCHAR(30),
+## TaskSubject Table - 1
+```sql
+CREATE TABLE TaskSubject(
+    TaskSub_ID INT PRIMARY KEY IDENTITY(1,1),
+    TaskSubName VARCHAR(50)
 );
 
---- Inserting Designations into MasterDesignation Table
-INSERT INTO MasterDesignation (DesignationName) VALUES ('Manager');
-INSERT INTO MasterDesignation (DesignationName) VALUES ('Developer');
-INSERT INTO MasterDesignation (DesignationName) VALUES ('Analyst');
+-- Populating TaskSubject Table
+INSERT INTO TaskSubject VALUES('SQL');
+INSERT INTO TaskSubject VALUES('ASP.NET');
+INSERT INTO TaskSubject VALUES('React');
 
---- Create Table - 2
-CREATE TABLE Employee(
-  EmpID INT PRIMARY KEY IDENTITY(1,1),
-  EmpName VARCHAR(50),
-  Birthdate DATE,
-  DesignationID INT FOREIGN KEY REFERENCES MasterDesignation(ID),
-  Gender INT,
-  EmailID VARCHAR(50),
-  MobNO VARCHAR(20),
+-- Displaying TaskSubject Table Data
+SELECT * FROM TaskSubject;
+```
+
+## TaskType Table - 2
+```sql
+CREATE TABLE TaskType(
+    TaskType_ID INT PRIMARY KEY IDENTITY(1,1),
+    TaskTypeName VARCHAR(50)
 );
+
+-- Populating TaskType Table
+INSERT INTO TaskType VALUES('Learning');
+INSERT INTO TaskType VALUES('Discussion');
+INSERT INTO TaskType VALUES('Assignment');
+
+-- Displaying TaskType Table Data
+SELECT * FROM TaskType;
 ```
 
-## Creating Stored Procedures
-
-### Stored Procedure-1 for Inserting Employee Record
-
+## TaskModule Table - 3
 ```sql
-GO
-CREATE PROCEDURE Usp_InsertNewRecord
-  @EmpName VARCHAR(50),
-  @Birthdate DATE,
-  @DesignationID INT,
-  @Gender INT,
-  @EmailID VARCHAR(50),
-  @MobNO VARCHAR(20)
+CREATE TABLE TaskModule(
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    TaskName VARCHAR(100),
+    RefTaskSub_ID INT FOREIGN KEY REFERENCES TaskSubject(TaskSub_ID),
+    RefTaskType_ID INT FOREIGN KEY REFERENCES TaskType(TaskType_ID),
+    Date_Time DATETIME
+);
+
+-- Displaying TaskModule Table Data
+SELECT * FROM TaskModule;
+
+-- Populating TaskModule Table
+INSERT INTO TaskModule VALUES('Database Introduction',1,1,'2024-02-01 16:00:00');
+-- Inserting TaskModule records (truncated for brevity)
+
+```
+
+# Stored Procedures
+
+## Usp_AddTaskDetails
+```sql
+CREATE PROCEDURE Usp_AddTaskDeatils
+    @TaskName VARCHAR(50),
+    @RefTaskSub_ID INT,
+    @RefTaskType_ID INT,
+    @Date_Time Datetime
 AS
 BEGIN
---- SQL Query {
-INSERT INTO Employee(EmpName, Birthdate, DesignationID, Gender, EmailID, MobNO)
-VALUES(@EmpName, @Birthdate, @DesignationID, @Gender, @EmailID, @MobNO);
---- SQL Query Closed }
+    INSERT INTO TaskModule VALUES(@TaskName,@RefTaskSub_ID,@RefTaskType_ID,@Date_Time)
 END;
 
-EXEC Usp_InsertNewRecord @EmpName='Aman', @Birthdate='2002-11-16', @DesignationID=1, @Gender=1, @EmailID='aman@gmail.com', @MobNo='2748731798';
+-- Example of executing the stored procedure
+EXEC Usp_AddTaskDeatils @TaskName='SQL',@RefTaskSub_ID=1,@RefTaskType_ID=2,@Date_Time='2024-02-10 05:30:00';
 ```
 
-### Stored Procedure-2 for Updating Employee Record
-
+## Usp_ViewSavedTask
 ```sql
-GO
-CREATE PROCEDURE Usp_UpdateEmployeeList
-  @EmployeeID INT,
-  @NewEmpName VARCHAR(50)
+CREATE PROCEDURE Usp_ViewSavedTask
 AS
 BEGIN
---- SQL Query {
-UPDATE Employee 
-SET EmpName=@NewEmpName
-WHERE EmpID=@EmployeeID;
---- SQL Query Closed }
+    SELECT ID,TaskSubName,TaskName,Date_Time,TaskTypeName 
+    FROM ((TaskModule
+    INNER JOIN TaskSubject ON TaskModule.RefTaskSub_ID=TaskSubject.TaskSub_ID)
+    INNER JOIN TaskType ON TaskModule.RefTaskType_ID=TaskType.TaskType_ID);
 END;
 
-EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
+-- Example of executing the stored procedure
+EXEC Usp_ViewSavedTask;
 ```
 
-### Stored Procedure-3 for Displaying Employee Record
-
+## Usp_EditSavedTask
 ```sql
-GO
-CREATE PROCEDURE Usp_GetEmployeeDetails
-  @EmployeeID INT
+ALTER PROCEDURE Usp_EditSavedTask
+    @ID INT,
+    @RefTaskSub_ID INT = NULL ,
+    @TaskName VARCHAR = NULL,
+    @Date_Time DATETIME = NULL,
+    @RefTaskType_ID INT = NULL
 AS
 BEGIN
---- SQL Query {
-SELECT EmpName, DesignationName, EmailID, MobNO 
-FROM Employee
-INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE EmpID=@EmployeeID;
---- SQL Query Closed }
+    UPDATE TaskModule SET TaskName=ISNULL(@TaskName, TaskName),
+    RefTaskSub_ID=ISNULL(@RefTaskSub_ID,RefTaskSub_ID),
+    RefTaskType_ID=ISNULL(@RefTaskType_ID,RefTaskType_ID),
+    Date_Time=ISNULL(@Date_Time,Date_Time) WHERE ID=@ID;
 END;
 
-EXEC Usp_GetEmployeeDetails @EmployeeID=1;
+-- Example of executing the stored procedure
+EXEC Usp_EditSavedTask @ID=2,@TaskName='XJUK';
 ```
 
-### Stored Procedure-4 for Deleting Employee Record
-
+## Usp_DeleteTaskRecord
 ```sql
-GO
-CREATE PROCEDURE Usp_DeleteEmployeeDetails 
-  @EmployeeID INT
+ALTER PROCEDURE Usp_DeleteTaskRecord 
+  @ID INT
 AS
 BEGIN
---- SQL Query {
-DELETE FROM Employee WHERE EmpID=@EmployeeID;
---- SQL Query Closed }
+    DELETE FROM TaskModule WHERE ID=@ID;
 END;
 
-EXEC Usp_DeleteEmployeeDetails @EmployeeID=1;
+-- Example of executing the stored procedure
+EXEC Usp_DeleteTaskRecord @ID=2;
 ```
-### Stored Procedure-5 for Dropdown Of Designation Names
-``` SQL
-GO
-CREATE PROCEDURE Usp_MasterDesignation
-AS 
-BEGIN
-SELECT * FROM MasterDesignation;
-END
-EXEC Usp_MasterDesignation;
+
+The provided documentation outlines the creation of a database, table schema, and stored procedures in Markdown format for better readability and understanding.
 ```
 / / C O D E  _  R E D
