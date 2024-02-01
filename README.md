@@ -2,7 +2,7 @@
 # Total 5 Stored Procedures based on task / PDF
 ##### By Aman Kadam
 ##### Problem Statement Snapshot
-![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/SQL-Task-%7C-Notes-%7C-Queries/Task-Practical.jpg)
+![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/01-SQL-Task-%7C-Notes-%7C-Queries/Task-Practical.jpg)
 ## Database and Tables Creation
 
 ```sql
