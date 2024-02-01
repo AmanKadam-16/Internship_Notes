@@ -1,11 +1,11 @@
-# SQL Task | Task Assignment Module
+# 02 - SQL Task | Task Assignment Module
 # Total 4 Stored Procedures based on task / PDF
 ##### By Aman Kadam
 ##### Problem Statement Snapshot
 ![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/02-SQL-Task-%7C-Notes-%7C-Queries/Task-Practical-01.jpg)
 ![SS of UI](https://github.com/AmanKadam-16/Internship_Notes/blob/02-SQL-Task-%7C-Notes-%7C-Queries/Task-Practical-02.jpg)
-## Tables Schema
-![SS of Schema](https://github.com/AmanKadam-16/Internship_Notes/blob/02-SQL-Task-%7C-Notes-%7C-Queries/Database-Diagram.jpg)
+# Tables Schema
+![SS of Schema](https://github.com/AmanKadam-16/Internship_Notes/blob/02-SQL-Task-%7C-Notes-%7C-Queries/Database-Diagram.png)
 
 ## Creating Database
 ```sql
@@ -133,5 +133,6 @@ END;
 -- Example of executing the stored procedure
 EXEC Usp_DeleteTaskRecord @ID=2;
 ```
+### Working on Reminder Feature...
 ***
 / / C O D E  _  R E D
