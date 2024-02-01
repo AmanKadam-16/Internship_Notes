@@ -72,7 +72,7 @@ INSERT INTO TaskModule VALUES('Database Introduction',1,1,'2024-02-01 16:00:00')
 
 ## Usp_AddTaskDetails
 ```sql
-CREATE PROCEDURE Usp_AddTaskDeatils
+CREATE PROCEDURE Usp_AddTaskDetails
     @TaskName VARCHAR(50),
     @RefTaskSub_ID INT,
     @RefTaskType_ID INT,
@@ -83,7 +83,7 @@ BEGIN
 END;
 
 -- Example of executing the stored procedure
-EXEC Usp_AddTaskDeatils @TaskName='SQL',@RefTaskSub_ID=1,@RefTaskType_ID=2,@Date_Time='2024-02-10 05:30:00';
+EXEC Usp_AddTaskDetails @TaskName='SQL',@RefTaskSub_ID=1,@RefTaskType_ID=2,@Date_Time='2024-02-10 05:30:00';
 ```
 
 ## Usp_ViewSavedTask
@@ -133,7 +133,5 @@ END;
 -- Example of executing the stored procedure
 EXEC Usp_DeleteTaskRecord @ID=2;
 ```
-
-The provided documentation outlines the creation of a database, table schema, and stored procedures in Markdown format for better readability and understanding.
-```
+***
 / / C O D E  _  R E D
