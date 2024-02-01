@@ -123,7 +123,7 @@ EXEC Usp_EditSavedTask @ID=2,@TaskName='SQL Mockup Design';
 
 ## Usp_DeleteTaskRecord
 ```sql
-ALTER PROCEDURE Usp_DeleteTaskRecord 
+CREATE PROCEDURE Usp_DeleteTaskRecord 
   @ID INT
 AS
 BEGIN
