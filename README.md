@@ -103,7 +103,7 @@ EXEC Usp_ViewSavedTask;
 
 ## Usp_EditSavedTask
 ```sql
-ALTER PROCEDURE Usp_EditSavedTask
+CREATE PROCEDURE Usp_EditSavedTask
     @ID INT,
     @RefTaskSub_ID INT = NULL ,
     @TaskName VARCHAR = NULL,
@@ -118,7 +118,7 @@ BEGIN
 END;
 
 -- Example of executing the stored procedure
-EXEC Usp_EditSavedTask @ID=2,@TaskName='XJUK';
+EXEC Usp_EditSavedTask @ID=2,@TaskName='SQL Mockup Design';
 ```
 
 ## Usp_DeleteTaskRecord
