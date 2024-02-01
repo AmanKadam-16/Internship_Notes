@@ -8,9 +8,8 @@
 ![Actual_Design](https://github.com/AmanKadam-16/Internship_Notes/blob/Design-Mockup-And-User-Story-Task/Frame-1.png)
 ![Actual_Design](https://github.com/AmanKadam-16/Internship_Notes/blob/Design-Mockup-And-User-Story-Task/Frame-2.png)
 
-Certainly! Here's the decorated text in Markdown format:
-
-# Title - Task Assignment Module
+# User Story
+## Title - Task Assignment Module
 
 ## Pre-requisite:
 1. The user must have an existing account with appropriate permissions to assign tasks.
