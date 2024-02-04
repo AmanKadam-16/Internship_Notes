@@ -64,18 +64,25 @@ EXEC Usp_InsertNewRecord @EmpName='Aman', @Birthdate='2002-11-16', @DesignationI
 ```sql
 GO
 CREATE PROCEDURE Usp_UpdateEmployeeList
-  @EmployeeID INT,
-  @NewEmpName VARCHAR(50)
+  @EmpID INT,
+  @EmpName VARCHAR(50) =NULL,
+  @BirthDate DATE =NULL,
+  @DesignationID INT =NULL,
+  @Gender INT =NULL,
+  @EmailID VARCHAR(50) =NULL,
+  @MobNO VARCHAR(20) =NULL
 AS
 BEGIN
 --- SQL Query {
 UPDATE Employee 
-SET EmpName=@NewEmpName
-WHERE EmpID=@EmployeeID;
+SET EmpName=ISNULL(@EmpName,EmpName),BirthDate=ISNULL(@BirthDate,BirthDate),
+DesignationID=ISNULL(@DesignationID,DesignationID),
+Gender=ISNULL(@Gender,Gender),EmailID=ISNULL(@EmailID,EmailID),MobNO=ISNULL(@MobNO,MobNO)
+ WHERE EmpID=@EmpID;
 --- SQL Query Closed }
 END;
 
-EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
+EXEC Usp_UpdateEmployeeList @EmpID=1, @EmpName='Code_RED';
 ```
 
 ### Stored Procedure-3 for Displaying Employee Record
@@ -83,17 +90,17 @@ EXEC Usp_UpdateEmployeeList @EmployeeID=1, @NewEmpName='Code_RED';
 ```sql
 GO
 CREATE PROCEDURE Usp_GetEmployeeDetails
-  @EmployeeID INT
+  @EmpID INT
 AS
 BEGIN
 --- SQL Query {
 SELECT EmpName, DesignationName, EmailID, MobNO 
 FROM Employee
-INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE EmpID=@EmployeeID;
+INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE EmpID=@EmpID;
 --- SQL Query Closed }
 END;
 
-EXEC Usp_GetEmployeeDetails @EmployeeID=1;
+EXEC Usp_GetEmployeeDetails @EmpID=1;
 ```
 
 ### Stored Procedure-4 for Deleting Employee Record
