@@ -1,30 +1,46 @@
-# Soft Skill Session - Email Writing 📧
+# 02 - Soft Skill Session - Email Writing 📧
+# Adding a Signature in Gmail Documentation
 
-## In-Depth Exploration:
+## Introduction
+Adding a signature to your Gmail account is a great way to personalize your emails and provide essential contact information. This documentation will guide you through the process and explain the two options available for applying your signature: "Append to new outgoing mails" and "Append to replies and forwards."
 
-### 1. **CC (Carbon Copy) 📤:**
-   - **Purpose:** Inclusive sharing.
-   - **How?** Add email addresses in the CC field.
-   - **Why?** Keeps everyone informed.
+## Steps to Add a Signature in Gmail
 
-### 2. **BCC (Blind Carbon Copy) 🕶️:**
-   - **Purpose:** Discreet sharing.
-   - **How?** Add recipients, but they won't see who else got it.
-   - **Why?** Protects privacy, avoids clutter.
+### Step 1: Access Gmail Settings
+1. Open your Gmail account.
+2. In the top right corner, click on the gear icon (⚙️) and select "See all settings."
 
-### 3. **Title 🌟:**
-   - **Conciseness:** Short and impactful.
-   - **Content Reflection:** Briefly captures the essence.
-   - **Importance:** Sets expectations for the reader.
+### Step 2: Navigate to the "General" Tab
+3. In the settings menu, click on the "General" tab.
 
-### 4. **Salutation/Respect 👋:**
-   - **Formality:** Start with "Sir/Mam."
-   - **Professional Tone:** Establishes respect.
-   - **Connection:** Like a digital handshake.
+### Step 3: Scroll Down to the Signature Section
+4. Scroll down until you find the "Signature" section.
 
-### 5. **New Line and Spacing 📏:**
-   - **Readability:** Use proper spacing.
-   - **Paragraph Structure:** Break logically.
-   - **Engagement:** Enhances the visual appeal.
+### Step 4: Edit Signature
+5. Check the box next to "Insert this signature before quoted text in replies and remove the '--' line that precedes it."
+6. In the text box, add your signature:
+Example -
+```md
+--
+Regards,
+Aman Kadam,
+Intern,
+Aadi Technology,
+9359xxxx82.
+```
 
----
+7. Feel free to customize the signature as per your preferences.
+
+### Step 5: Save Changes
+8. Scroll down to the bottom and click on "Save Changes" to apply your new signature.
+
+## Signature Options in Gmail
+
+### Option 1: Append to New Outgoing Mails
+When you choose this option, your signature will be automatically added to the end of every new email you compose.
+
+### Option 2: Append to Replies and Forwards
+By selecting this option, your signature will also be appended to the end of your replies and forwarded messages, maintaining a consistent and professional appearance across all your email interactions.
+
+## Conclusion
+Adding a signature in Gmail is a simple yet effective way to enhance your email communication. Choose the option that best suits your preferences and maintain a professional image in all your correspondences.
