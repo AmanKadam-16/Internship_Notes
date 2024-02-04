@@ -1,5 +1,5 @@
 # 02 - Soft Skill Session - Email Writing 📧
-# Adding a Signature in Gmail Documentation
+# Adding a Signature in Gmail 
 
 ## Introduction
 Adding a signature to your Gmail account is a great way to personalize your emails and provide essential contact information. This documentation will guide you through the process and explain the two options available for applying your signature: "Append to new outgoing mails" and "Append to replies and forwards."
