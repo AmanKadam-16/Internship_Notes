@@ -32,7 +32,6 @@
 * Get customer **feedback 🗣️**
 * Repeat 🔁
 ---
-Here is a summary of the key points from the Agile Manifesto and 12 Principles of Agile using markdown formatting and emojis:
 
 # Agile Manifesto 📜
 
