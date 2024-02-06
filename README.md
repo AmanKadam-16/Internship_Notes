@@ -90,17 +90,16 @@ EXEC Usp_UpdateEmployeeList @EmpID=1, @EmpName='Code_RED';
 ```sql
 GO
 CREATE PROCEDURE Usp_GetEmployeeDetails
-  @EmpID INT
 AS
 BEGIN
 --- SQL Query {
 SELECT EmpName, DesignationName, EmailID, MobNO 
 FROM Employee
-INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID WHERE EmpID=@EmpID;
+INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID ;
 --- SQL Query Closed }
 END;
 
-EXEC Usp_GetEmployeeDetails @EmpID=1;
+EXEC Usp_GetEmployeeDetails;
 ```
 
 ### Stored Procedure-4 for Deleting Employee Record
