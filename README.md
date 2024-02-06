@@ -50,9 +50,17 @@ CREATE PROCEDURE Usp_InsertNewRecord
   @MobNO VARCHAR(20)
 AS
 BEGIN
+--- POST / Inserting Employee Record into DB
 --- SQL Query {
 INSERT INTO Employee(EmpName, Birthdate, DesignationID, Gender, EmailID, MobNO)
 VALUES(@EmpName, @Birthdate, @DesignationID, @Gender, @EmailID, @MobNO);
+--- SQL Query Closed }
+---
+--- GET / Displaying Employee Record
+--- SQL Query {
+SELECT EmpName, DesignationName, EmailID, MobNO 
+FROM Employee
+INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID ;
 --- SQL Query Closed }
 END;
 
@@ -85,24 +93,7 @@ END;
 EXEC Usp_UpdateEmployeeList @EmpID=1, @EmpName='Code_RED';
 ```
 
-### Stored Procedure-3 for Displaying Employee Record
-
-```sql
-GO
-CREATE PROCEDURE Usp_GetEmployeeDetails
-AS
-BEGIN
---- SQL Query {
-SELECT EmpName, DesignationName, EmailID, MobNO 
-FROM Employee
-INNER JOIN MasterDesignation ON Employee.DesignationID=MasterDesignation.ID ;
---- SQL Query Closed }
-END;
-
-EXEC Usp_GetEmployeeDetails;
-```
-
-### Stored Procedure-4 for Deleting Employee Record
+### Stored Procedure-3 for Deleting Employee Record
 
 ```sql
 GO
@@ -117,7 +108,7 @@ END;
 
 EXEC Usp_DeleteEmployeeDetails @EmployeeID=1;
 ```
-### Stored Procedure-5 for Dropdown Of Designation Names
+### Stored Procedure-4 for Dropdown Of Designation Names
 ``` SQL
 GO
 CREATE PROCEDURE Usp_MasterDesignation
