@@ -1,3 +1,6 @@
+# SCRUM Framework Workflow
+![ScrumImg](https://miro.medium.com/v2/resize:fit:1400/1*pAjNWHhl2kERAU3JzZaN2A.jpeg)
+
 # Scrum Framework 🛠
 * **Agile process**, **model**, **develop**, **test**, **release** software 
 
@@ -31,7 +34,5 @@
   - **Reflect** on what **went well** and **improvements** needed
 * **Backlog Refinement** 📈
   - **Prioritize** product backlog items
-# SCRUM Framework Workflow
-![ScrumImg](https://miro.medium.com/v2/resize:fit:1400/1*pAjNWHhl2kERAU3JzZaN2A.jpeg)
 ---
 / / C O D E  _  R E D
