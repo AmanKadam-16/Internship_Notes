@@ -1,81 +1,35 @@
-# What is Agile? 🤔
+# Scrum Framework 🛠
+* **Agile process**, **model**, **develop**, **test**, **release** software 
 
-* **Incremental & Iterative 👌** methodology used in Software Development Life Cycle 
-* Adding **New 🆕 features** to **Existing 🧑‍💻 features**  
-* **Repeating 🔁** same process again and again in **sprints 🏃‍♀️**
+## Scrum Team 👥
+* **Product Owner 💼** 
+  - Define **features**, **prioritize** by **market value** and **priority**, **accept/reject** items
+  - Get **inputs** from **customers**
+* **Scrum Master 🏆**
+  - **Aware** of **entire** Agile **process**, **activities**
+  - Ensure people **follow** Agile **process**  
+* **Developers 👨‍💻 & QA 👩‍💻**
+  - **Develop** and **test** software
 
-# Key Benefits 😃
+## Scrum Artifacts 📋  
+* **Product Backlog 📖** 
+  - Prepared by **Product Owner**
+  - **Requirements**, **stories**, **epics**
+* **Sprint Backlog 📃**
+  - **Committed stories** for the **sprint** 
+* **Burn Down Chart** 📈
+  - Track **work planned**, **completed**, **pending**
 
-* Accommodates **Changing 📝 requirements** at any stage  
-* Delivers **Quality 💯 software** to customers **Quickly ⚡️**  
-* **Increased 📈 customer satisfaction** 
-* **Improved 👍 team communication**
-* **Simple 😅 methodology**, easy to understand  
-
-# Tradeoffs 😕  
-
-* Less focus 🚫 on upfront design and documentation  
-* More 📣 meetings to discuss requirements  
-
-# Best Suited For ♾️
-
-* Large 📊, complex 🤯 projects 
-* Unclear 🤷‍♂️ requirements that may change  
-* Flexible ☮️ timelines
-* Delivering 🚚 quality software regularly and rapidly  
-
-# Key Activities 👷‍♀️
-
-* Gather 📋 requirements 
-* Break into **sprints 🏃‍♀️**
-* **Plan 📅, design 🎨, develop 👨‍💻, test 🧪, review 🔎, release 📤**
-* Get customer **feedback 🗣️**
-* Repeat 🔁
+## Scrum Ceremonies ♾️
+* **Sprint Planning** 📅  
+  - **Review**, **choose** stories  
+* **Daily Standup** 🕑 
+  - Provide **updates** on **progress**   
+* **Sprint Review** 📝
+  - **Review completed** work
+* **Sprint Retrospective** 🪞
+  - **Reflect** on what **went well** and **improvements** needed
+* **Backlog Refinement** 📈
+  - **Prioritize** product backlog items
 ---
-
-# Agile Manifesto 📜
-
-* **Individuals and interactions 👥** over processes and tools  
-* **Working product 💻** over comprehensive documentation 📚
-* **Customer collaboration 🤝** over contract negotiation 📃  
-* **Responding to change 💫** over following a plan 📅
-
-# 12 Principles of Agile ✅
-
-## 1. Customer Satisfaction 😊
-* Satisfy customer through early and quick delivery  
-
-## 2. Welcome Change 📝 
-* Flexible design to accommodate changing needs   
-
-## 3. Frequent Delivery 🚚
-* Ensure frequent delivery of working software 
-
-## 4. Work Together 🤝 
-* Collaboration between devs, business, customers   
-
-## 5. Motivated Team 🏋️‍♀️
-* Trust motivated individuals to get work done  
-
-## 6. Face-to-Face Conversation 👥
-* Most efficient communication method   
-
-## 7. Working Software 💻
-* Software is the primary measure of progress
-
-## 8. Sustainable Pace 🏃‍♀️
-* Promote constant pace  
-
-## 9. Technical Excellence 💯
-* Improve agility through good design  
-
-## 10. Simplicity 😅
-* Eliminate non-value adding activities   
-
-## 11. Self-Organization 🧠
-* Best designs from self-organizing teams  
-
-## 12. Regular Reflection 💭
-* Reflect and adjust to improve  
----
-// C O D E _ R E D
+/ / C O D E  _  R E D
