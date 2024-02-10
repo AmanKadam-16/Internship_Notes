@@ -1,19 +1,331 @@
-# Greetings, I'm Aman! 👋
+# IndexController.cs
+```csharp
+using PreSchoolAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
-Welcome to my GitHub repository where I am documenting my 6-month internship journey at Aadi Technology. 🚀
-![LINE](https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif)
+namespace PreSchoolAPI.Controllers
+{
+    public class IndexController : ApiController
+    {
+        [HttpPost]
+        [Route("AddEmployeeDetails")]
+        public string AddEmployeeDetails([FromBody] EmployeeModel employeeModel)
+        {
+            return employeeModel.AddEmployeeDetails();
+        }
 
-## Repository Overview
+        [HttpPost]
+        [Route("GetEmployeeList")] 
+        public List<EmployeeModel> GetEmployeeList([FromBody] EmployeeModel employeeModel)  
+        {
+            return employeeModel.GetEmployeeList();
+        }
 
-This repository encompasses a variety of branches, each dedicated to a distinct subject or topic that I've encountered and delved into during my internship. Feel free to explore these branches to discover the wealth of knowledge and experiences I've gained. 🌳
+        [HttpPost]
+        [Route("GetEmployeeDetails")]
+        public EmployeeModel GetEmployeeDetails([FromBody] EmployeeModel employeeModel) 
+        {
+            return employeeModel.GetEmployeeDetails();
+        }
 
-## Your Feedback Matters!
+        [HttpPost]
+        [Route("DeleteEmployee")]
+        public string DeleteEmployee([FromBody] EmployeeModel employeeModel)
+        {
+            return employeeModel.DeleteEmployee();
+        }
 
-I've put effort into organizing and sharing my learnings, and I'd love to hear from you. Whether it's feedback, suggestions, or insights from your own experiences, your input is valuable. Please share your thoughts in the comments or create an issue. 😊
+        [HttpPost]
+        [Route("EditEmployeeDetails")]
+        public string EditEmployeeDetails([FromBody] EmployeeModel employeeModel)
+        {
+            return employeeModel.EditEmployeeDetails();
+        }
 
-## Happy Coding! 💻
+        [HttpPost]
+        [Route("GetDesignation")]
+        public List<EmployeeModel> GetDesignation()  
+        {
+            EmployeeModel EmployeeModel = new EmployeeModel();
+            return EmployeeModel.GetDesignation();
+        }
+    }
+}
+```
 
-Thank you for taking the time to visit my repository. I hope you enjoy the content and find it beneficial for your own journey. Happy coding! 💻
-***
-![MasterHead](https://user-images.githubusercontent.com/86270481/214122618-1bf43327-cdef-456e-81fe-fc71a9070c07.gif)
-// C O D E  _  R E D
+# EmployeeModel.cs
+```csharp
+/* EmployeeModel.cs*/
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Threading.Tasks;
+using System.Web.Helpers;
+
+namespace PreSchoolAPI.Models
+{
+    public class EmployeeModel
+    {
+        public int ID { get; set; }
+        public string EmployeeName { get; set; }
+
+        public string BirthDate { get; set; }
+
+        public int DesignationId { get; set; }
+
+        public string DesignationName { get; set; }
+
+        public int Gender { get; set; }
+
+        public string EmailId { get; set; }
+
+        public string PhoneNo { get; set; }
+
+        public string AddEmployeeDetails()
+        {
+            string AddEmployeeDetailsReturn = "";
+            string connetionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connetionString))
+            {
+                oConnection.Open();
+                using (SqlCommand oCommand = oConnection.CreateCommand())
+                {
+                    oCommand.CommandType = CommandType.StoredProcedure;
+                    oCommand.CommandText = "USP_AddEmployeeDetails";
+                    oCommand.Parameters.Add(new SqlParameter("@EmployeeName", SqlDbType.VarChar)).Value = EmployeeName;
+                    oCommand.Parameters.Add(new SqlParameter("@BirthDate", SqlDbType.Date))
+                    .Value = BirthDate;
+                    oCommand.Parameters.Add(new SqlParameter("@DesignationId", SqlDbType.Int))
+                    .Value = DesignationId;
+                    oCommand.Parameters.Add(new SqlParameter("@Gender", SqlDbType.Int))
+                    .Value = Gender;
+                    oCommand.Parameters.Add(new SqlParameter("@EmailId", SqlDbType.VarChar))
+                    .Value = EmailId;
+                    oCommand.Parameters.Add(new SqlParameter("@PhoneNo", SqlDbType.VarChar))
+                    .Value = PhoneNo;
+                    try
+                    {
+                        oCommand.ExecuteNonQuery();
+                        AddEmployeeDetailsReturn = "Employee Added Successfully";
+                    }
+                    catch (Exception e)
+                    {
+                        oConnection.Close();
+                        AddEmployeeDetailsReturn = "Failed to Add Employee";
+                    }
+                }
+            }
+            return AddEmployeeDetailsReturn;
+        }
+
+        public List<EmployeeModel> GetEmployeeList()
+        {
+            List<EmployeeModel> EmployeeModel = new List<EmployeeModel>();
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connectionString))
+            {
+                oConnection.Open();
+                using (SqlCommand oCommand = oConnection.CreateCommand())
+                {
+                    oCommand.CommandType = CommandType.StoredProcedure;
+                    oCommand.CommandText = "USP_GetEmployeeList";
+
+                    try
+                    {
+
+                        SqlDataReader dr = oCommand.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            EmployeeModel.Add(new EmployeeModel
+                            {
+
+                                EmployeeName = dr["EmployeeName"].ToString(),
+                                BirthDate = dr["BirthDate"].ToString(),
+                                DesignationName = dr["DesignationName"].ToString(),
+                                EmailId = dr["EmailId"].ToString(),
+                                PhoneNo = dr["PhoneNo"].ToString(),
+                            }
+                            );
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        oConnection.Close();
+                        // Action after the exception is caught
+                    }
+                }
+                return EmployeeModel;
+
+            }
+
+        }
+
+        public EmployeeModel GetEmployeeDetails()
+        {
+            EmployeeModel EmployeeDetailModel = new EmployeeModel();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection Connection = new SqlConnection(connectionString))
+            {
+                Connection.Open();
+                using (SqlCommand Command = Connection.CreateCommand())
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "USP_GetEmployeeDetails";
+
+                     Command.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int))
+                        .Value = ID; 
+
+
+                    try
+                    {
+                        SqlDataReader dr = Command.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            EmployeeDetailModel =
+                                new EmployeeModel
+                                {
+
+                                    EmployeeName = dr["EmployeeName"].ToString(),
+                                    BirthDate = dr["BirthDate"].ToString(),
+                                    DesignationName = dr["DesignationName"].ToString(),
+                                    Gender =Convert.ToInt32(dr["Gender"].ToString()),
+                                    EmailId = dr["EmailId"].ToString(),
+                                    PhoneNo = dr["PhoneNo"].ToString(),
+                                };
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Connection.Close();
+                        // Action after the exception is caught.
+                    }
+                }
+            }
+
+            return EmployeeDetailModel;
+        }
+
+        public string DeleteEmployee()
+        {
+            string DeleteEmployeeReturn = "";
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    oConnection.Open();
+                    using (SqlCommand oCommand = oConnection.CreateCommand())
+                    {
+                        oCommand.CommandType = CommandType.StoredProcedure;
+                        oCommand.CommandText = "USP_DeleteEmployee";
+
+                        SqlParameter param;
+                        param = oCommand.Parameters.Add("@ID", SqlDbType.Int);
+                        param.Value = ID;
+
+                        oCommand.ExecuteNonQuery();
+
+                        DeleteEmployeeReturn = "Employee Details Deleted Successfully";
+                    }
+                }
+                catch (Exception e)
+                {
+                    oConnection.Close();
+                    DeleteEmployeeReturn = "Failed to Delete Employee Details";
+                }
+
+                return DeleteEmployeeReturn;
+            }
+        }
+
+
+        public string EditEmployeeDetails()
+        {
+            string EditDetails = "";
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection Connection = new SqlConnection(connectionString))
+            {
+                Connection.Open();
+                using (SqlCommand Command = Connection.CreateCommand())
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "USP_UpdateEmployeeDetails";
+
+                    SqlParameter param;
+                    param = Command.Parameters.Add("ID", SqlDbType.Int);
+                    param.Value = ID;
+                    param = Command.Parameters.Add("EmployeeName", SqlDbType.VarChar);
+                    param.Value = EmployeeName;
+                    param = Command.Parameters.Add("BirthDate", SqlDbType.Date);
+                    param.Value = BirthDate;
+                    param = Command.Parameters.Add("EmailId", SqlDbType.VarChar);
+                    param.Value = EmailId;
+                    param = Command.Parameters.Add("PhoneNo", SqlDbType.VarChar);
+                    param.Value = PhoneNo;
+
+                    try
+                    {
+                        Command.ExecuteNonQuery();
+                        EditDetails = "Employee Details Edited Successfully";
+                    }
+                    catch (Exception e)
+                    {
+                        Connection.Close();
+                        EditDetails = "Failed to Edit Employee Details";
+                    }
+                }
+            }
+            return EditDetails;
+        }
+
+        public List<EmployeeModel> GetDesignation()
+        {
+            List<EmployeeModel> EmployeeModel = new List<EmployeeModel>();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connectionString))
+            {
+                oConnection.Open();
+                using (SqlCommand oCommand = oConnection.CreateCommand())
+                {
+                    oCommand.CommandType = CommandType.StoredProcedure;
+                    oCommand.CommandText = "USP_GetDesignation";
+
+                    try
+                    {
+                        SqlDataReader dr = oCommand.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            EmployeeModel.Add(new EmployeeModel
+                            {
+                                ID = Convert.ToInt32(dr["ID"].ToString()),
+                                DesignationName = dr["DesignationName"].ToString()
+                            });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        oConnection.Close();
+                        // Action after the exception is caught
+                    }
+                }
+            }
+
+            return EmployeeModel;
+        }
+
+    }
+}
+```
+/ / C O D E  _ R E D
