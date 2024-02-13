@@ -1,14 +1,14 @@
 # IndexController.cs
 ```csharp
-using PreSchoolAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Task_API.Models;
 
-namespace PreSchoolAPI.Controllers
+namespace Task_API.Controllers
 {
     public class IndexController : ApiController
     {
@@ -20,15 +20,15 @@ namespace PreSchoolAPI.Controllers
         }
 
         [HttpPost]
-        [Route("GetEmployeeList")] 
-        public List<EmployeeModel> GetEmployeeList([FromBody] EmployeeModel employeeModel)  
+        [Route("GetEmployeeList")]
+        public List<EmployeeModel> GetEmployeeList([FromBody] EmployeeModel employeeModel)
         {
             return employeeModel.GetEmployeeList();
         }
 
         [HttpPost]
         [Route("GetEmployeeDetails")]
-        public EmployeeModel GetEmployeeDetails([FromBody] EmployeeModel employeeModel) 
+        public EmployeeModel GetEmployeeDetails([FromBody] EmployeeModel employeeModel)
         {
             return employeeModel.GetEmployeeDetails();
         }
@@ -49,11 +49,56 @@ namespace PreSchoolAPI.Controllers
 
         [HttpPost]
         [Route("GetDesignation")]
-        public List<EmployeeModel> GetDesignation()  
+        public List<EmployeeModel> GetDesignation()
         {
             EmployeeModel EmployeeModel = new EmployeeModel();
             return EmployeeModel.GetDesignation();
         }
+
+
+        [HttpPost]
+        [Route("AddTasks")]
+        public string AddTasks([FromBody] TaskModel taskModel)
+        {
+            return taskModel.AddTasks();
+        }
+
+        [HttpPost]
+        [Route("DeleteTasks")]
+        public string DeleteTasks([FromBody] TaskModel taskModel)
+        {
+            return taskModel.DeleteTasks();
+        }
+
+        [HttpPost]
+        [Route("GetTaskDetails")]
+        public TaskModel GetTaskDetails([FromBody] TaskModel taskModel)
+        {
+            return taskModel.GetTaskDetails();
+        }
+
+        [HttpPost]
+        [Route("GetTaskSubjects")]
+        public TaskModel GetTaskSubjects([FromBody] TaskModel taskModel)
+        {
+            return taskModel.GetTaskSubjects();
+        }
+
+
+        [HttpPost]
+        [Route("GetTaskType")]
+        public TaskModel GetTaskType([FromBody] TaskModel taskModel)
+        {
+            return taskModel.GetTaskType();
+        }
+
+        [HttpPost]
+        [Route("EditTaskDetails")]
+        public string EditTaskDetails([FromBody] TaskModel taskModel)
+        {
+            return taskModel.EditTaskDetails();
+        }
+
     }
 }
 ```
@@ -327,5 +372,292 @@ namespace PreSchoolAPI.Models
 
     }
 }
+```
+# TaskModel.cs
+```csharp
+using Task_API.Models;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+
+namespace Task_API.Models
+{
+    public class TaskModel
+    {
+        public int ID { get; set; }
+
+        public int TaskSubjectId{ get; set; }
+
+        public string TaskName { get; set; }
+
+        public string Tasktime { get; set; }
+
+        public int TaskTypeId{ get; set; }
+
+        public string IsReminder { get; set; }
+
+        public string TaskSubjectName { get; set; }
+
+        public string TaskTypeName { get; set; }
+
+        public string AddTasks()
+        {
+            string AddTasksReturn = "";
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connectionString))
+            {
+                oConnection.Open();
+                using (SqlCommand oCommand = oConnection.CreateCommand())
+                {
+                    oCommand.CommandType = CommandType.StoredProcedure;
+                    oCommand.CommandText = "USP_AddTasks";
+                    oCommand.Parameters.Add(new SqlParameter("@TaskSubjectId", SqlDbType.Int))
+                    .Value = TaskSubjectId;
+                    oCommand.Parameters.Add(new SqlParameter("@TaskName", SqlDbType.VarChar))
+                    .Value = TaskName;
+                    oCommand.Parameters.Add(new SqlParameter("@Tasktime", SqlDbType.DateTime))
+                    .Value = Tasktime;
+                    oCommand.Parameters.Add(new SqlParameter("@TaskTypeId", SqlDbType.Int))
+                    .Value = TaskTypeId;
+                    oCommand.Parameters.Add(new SqlParameter("@IsReminder", SqlDbType.Bit))
+                    .Value = IsReminder;
+                    try
+                    {
+                        oCommand.ExecuteNonQuery();
+                        AddTasksReturn = "Task Added Successfully !";
+                    }
+                    catch (Exception e)
+                    {
+                        oConnection.Close();
+                        AddTasksReturn = "Failed to Add Task";
+                    }
+                }
+            }
+            return AddTasksReturn;
+        }
+
+
+        /*  Deleting tasks */  
+
+        public string DeleteTasks()
+        {
+            string DeleteTaskReturn = "";
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    oConnection.Open();
+                    using (SqlCommand oCommand = oConnection.CreateCommand())
+                    {
+                        oCommand.CommandType = CommandType.StoredProcedure;
+                        oCommand.CommandText = "USP_DeleteTasks";
+
+                        SqlParameter param;
+                        param = oCommand.Parameters.Add("@ID", SqlDbType.Int);
+                        param.Value = ID;
+
+                        oCommand.ExecuteNonQuery();
+
+                        DeleteTaskReturn = "Task Details Deleted Successfully";
+                    }
+                }
+                catch (Exception e)
+                {
+                    oConnection.Close();
+                    DeleteTaskReturn = "Failed to Delete Task Details";
+                }
+
+                return DeleteTaskReturn;
+            }
+        }
+
+
+
+        /*  Displaying Task Details According to ID */
+        public TaskModel GetTaskDetails()
+        {
+            TaskModel TaskDetailsModel = new TaskModel();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection Connection = new SqlConnection(connectionString))
+            {
+                Connection.Open();
+                using (SqlCommand Command = Connection.CreateCommand())
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "Usp_GetTasks";
+
+                    Command.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int))
+                       .Value = ID;
+
+
+                    try
+                    {
+                        SqlDataReader dr = Command.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            TaskDetailsModel =
+                                new TaskModel
+                                {
+
+                                    TaskSubjectName = dr["TaskSubjectName"].ToString(),
+                                    TaskName = dr["TaskName"].ToString(),
+                                    Tasktime = dr["Tasktime"].ToString(),
+                                    TaskTypeName = dr["TaskTypeName"].ToString()
+                                };
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Connection.Close();
+                        // Action after the exception is caught.
+                    }
+                }
+            }
+
+            return TaskDetailsModel;
+        }
+
+
+        /*  Displaying Task Subjects According to ID */
+        public TaskModel GetTaskSubjects()
+        {
+            TaskModel TaskSubjectsModel = new TaskModel();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection Connection = new SqlConnection(connectionString))
+            {
+                Connection.Open();
+                using (SqlCommand Command = Connection.CreateCommand())
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "Usp_GetTaskSubjects";
+
+                    Command.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int))
+                       .Value = ID;
+
+
+                    try
+                    {
+                        SqlDataReader dr = Command.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            TaskSubjectsModel =
+                                new TaskModel
+                                {
+
+                                    ID = Convert.ToInt32(dr["ID"].ToString()),
+                                    TaskSubjectName = dr["TaskSubjectName"].ToString(),
+                                };
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Connection.Close();
+                        // Action after the exception is caught.
+                    }
+                }
+            }
+
+            return TaskSubjectsModel;
+        }
+
+
+        /*  Displaying Task Type According to ID */
+        public TaskModel GetTaskType()
+        {
+            TaskModel TaskTypeModel = new TaskModel();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection Connection = new SqlConnection(connectionString))
+            {
+                Connection.Open();
+                using (SqlCommand Command = Connection.CreateCommand())
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "Usp_GetTaskType";
+
+                    Command.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int))
+                       .Value = ID;
+
+
+                    try
+                    {
+                        SqlDataReader dr = Command.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            TaskTypeModel =
+                                new TaskModel
+                                {
+
+                                    ID = Convert.ToInt32(dr["ID"].ToString()),
+                                    TaskTypeName = dr["TaskTypeName"].ToString(),
+                                };
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Connection.Close();
+                        // Action after the exception is caught.
+                    }
+                }
+            }
+
+            return TaskTypeModel;
+        }
+
+        /* Update / Edit Task Details */
+        public string EditTaskDetails()
+        {
+            string EditDetails = "";
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection Connection = new SqlConnection(connectionString))
+            {
+                Connection.Open();
+                using (SqlCommand Command = Connection.CreateCommand())
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "Usp_UpdateTasks";
+
+                    SqlParameter param;
+                    param = Command.Parameters.Add("ID", SqlDbType.Int);
+                    param.Value = ID;
+                    param = Command.Parameters.Add("TaskSubjectId", SqlDbType.Int);
+                    param.Value = TaskSubjectId;
+                    param = Command.Parameters.Add("TaskName", SqlDbType.VarChar);
+                    param.Value = TaskName;
+                    param = Command.Parameters.Add("Tasktime", SqlDbType.DateTime);
+                    param.Value = Tasktime;
+                    param = Command.Parameters.Add("TaskTypeId", SqlDbType.Int);
+                    param.Value = TaskTypeId;
+
+                    try
+                    {
+                        Command.ExecuteNonQuery();
+                        EditDetails = "Task Details Edited Successfully";
+                    }
+                    catch (Exception e)
+                    {
+                        Connection.Close();
+                        EditDetails = "Failed to Edit Task Details";
+                    }
+                }
+            }
+            return EditDetails;
+        }
+
+
+
+    }
+
+
+
+}
+
 ```
 / / C O D E  _ R E D
