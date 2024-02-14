@@ -11,7 +11,7 @@ npx create-react-app my-app
 cd my-app
 npm start
 ```
-### Here ```my-app``` is your React Project Name
+### Here ```my-app``` is your React App Name
 # And All Set ...!
 ![JavaScript Logo](https://user-images.githubusercontent.com/74038190/212257454-16e3712e-945a-4ca2-b238-408ad0bf87e6.gif)
 ![React](https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif)
