@@ -58,7 +58,7 @@ namespace Task_API.Controllers
 
         [HttpPost]
         [Route("AddTasks")]
-        public string AddTasks([FromBody] TaskModel taskModel)
+        public List<TaskModel> AddTasks([FromBody] TaskModel taskModel)
         {
             return taskModel.AddTasks();
         }
@@ -78,6 +78,13 @@ namespace Task_API.Controllers
         }
 
         [HttpPost]
+        [Route("GetTasksList")]
+        public List<TaskModel> GetTasksList([FromBody] TaskModel taskModel)
+        {
+            return taskModel.GetTasksList();
+        }
+
+        [HttpPost]
         [Route("GetTaskSubjects")]
         public TaskModel GetTaskSubjects([FromBody] TaskModel taskModel)
         {
@@ -94,7 +101,7 @@ namespace Task_API.Controllers
 
         [HttpPost]
         [Route("EditTaskDetails")]
-        public string EditTaskDetails([FromBody] TaskModel taskModel)
+        public TaskModel EditTaskDetails([FromBody] TaskModel taskModel)
         {
             return taskModel.EditTaskDetails();
         }
@@ -404,9 +411,9 @@ namespace Task_API.Models
 
         public string TaskTypeName { get; set; }
 
-        public string AddTasks()
+        public List<TaskModel> AddTasks()
         {
-            string AddTasksReturn = "";
+
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (SqlConnection oConnection = new SqlConnection(connectionString))
             {
@@ -425,20 +432,23 @@ namespace Task_API.Models
                     .Value = TaskTypeId;
                     oCommand.Parameters.Add(new SqlParameter("@IsReminder", SqlDbType.Bit))
                     .Value = IsReminder;
+ 
                     try
                     {
                         oCommand.ExecuteNonQuery();
-                        AddTasksReturn = "Task Added Successfully !";
+
                     }
                     catch (Exception e)
                     {
                         oConnection.Close();
-                        AddTasksReturn = "Failed to Add Task";
+
                     }
                 }
             }
-            return AddTasksReturn;
+            List<TaskModel> tasks = GetTasksList();
+            return tasks;
         }
+
 
 
         /*  Deleting tasks */  
@@ -521,6 +531,51 @@ namespace Task_API.Models
             }
 
             return TaskDetailsModel;
+        }
+
+
+
+
+        /* Get Tasks List */
+        public List<TaskModel> GetTasksList()
+        {
+            List<TaskModel> TaskModel = new List<TaskModel>();
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection oConnection = new SqlConnection(connectionString))
+            {
+                oConnection.Open();
+                using (SqlCommand oCommand = oConnection.CreateCommand())
+                {
+                    oCommand.CommandType = CommandType.StoredProcedure;
+                    oCommand.CommandText = "Usp_GetTasksList";
+
+                    try
+                    {
+
+                        SqlDataReader dr = oCommand.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            TaskModel.Add(new TaskModel
+                            {
+
+                                TaskSubjectName = dr["TaskSubjectName"].ToString(),
+                                TaskName = dr["TaskName"].ToString(),
+                                Tasktime = dr["Tasktime"].ToString(),
+                                TaskTypeName = dr["TaskTypeName"].ToString()
+                            }
+                            );
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        oConnection.Close();
+                        // Action after the exception is caught
+                    }
+                }
+                return TaskModel;
+
+            }
+
         }
 
 
@@ -612,9 +667,9 @@ namespace Task_API.Models
         }
 
         /* Update / Edit Task Details */
-        public string EditTaskDetails()
+        public TaskModel EditTaskDetails()
         {
-            string EditDetails = "";
+   
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (SqlConnection Connection = new SqlConnection(connectionString))
             {
@@ -639,16 +694,17 @@ namespace Task_API.Models
                     try
                     {
                         Command.ExecuteNonQuery();
-                        EditDetails = "Task Details Edited Successfully";
+
                     }
                     catch (Exception e)
                     {
                         Connection.Close();
-                        EditDetails = "Failed to Edit Task Details";
+
                     }
                 }
             }
-            return EditDetails;
+            TaskModel tasks = GetTaskDetails();
+            return tasks;
         }
 
 
@@ -656,8 +712,8 @@ namespace Task_API.Models
     }
 
 
-
 }
+
 
 ```
 / / C O D E  _ R E D
