@@ -1,29 +1,28 @@
-import React, { useState } from 'react'
-
+import React from 'react'
 
 function RegForm() {
-    const data = { name: '', email: '', password: '' }
-    const [formData, setFormData] = useState(data)
-    const [flag, isReg] = useState(false)
+  const data = { name: '', email: '', password: '' }
+  const [formData, setFormData] = useState(data)
+  const [flag, isReg] = useState(false)
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (!formData.name || !formData.email || !formData.password) {
-            alert('Please fill all the fields')
-        }
-        else {
-            isReg(true)
-            console.log("User Data submitted successfully..")
-        }
-
-        const handleChange = (e) => {
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-        }
+  const handleSubmit = (e) => {
+      e.preventDefault()
+      if (!formData.name || !formData.email || !formData.password) {
+          alert('Please fill all the fields')
       }
-        return (
- 
+      else {
+          isReg(true)
+          console.log("User Data submitted successfully..")
+      }
 
-                <form onSubmit={handleSubmit}>
+      const handleChange = (e) => {
+          setFormData({ ...formData, [e.target.name]: e.target.value })
+      } 
+    }
+  return (
+    <div>
+      <h1>Hello World !</h1>
+      <form onSubmit={handleSubmit}>
                    {flag && <pre> Hi {formData.name}, Your have registered successfully !!!!</pre>}
                     <div>
                         <h1>Registration Form</h1>
@@ -43,10 +42,8 @@ function RegForm() {
                     <button type='submit'>Submit</button>
                 </form>
 
-
-        )
-
-
+    </div>
+  )
 }
 
 export default RegForm
