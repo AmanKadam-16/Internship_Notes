@@ -166,7 +166,8 @@ const AddEmployee = () => {
                             ErrorMessage={BirthDateErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
-                        <Dropdown ItemList={DesignationList} Label={'Designation'} DefaultValue={DesignationId}
+                        <Dropdown ItemList={DesignationList} Label={'Designation'} 
+                        DefaultValue={DesignationId}
                             ClickItem={clickDesignation} />
                     </Grid>
                     <Grid item xs={12}>
@@ -181,7 +182,8 @@ const AddEmployee = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <RadioList ItemList={GenderList} Label={'Gender'} DefaultValue={Gender}
+                        <RadioList ItemList={GenderList} Label={'Gender'}
+                         DefaultValue={Gender}
                             ClickItem={clickGender}
                             ErrorMessage={GenderErrorMessage} />
                     </Grid>
