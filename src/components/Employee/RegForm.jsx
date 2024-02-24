@@ -1,18 +1,16 @@
- import React from 'react';
+import React from 'react'
 
 function RegForm() {
   return (
     <div>
-      <h1>Registration Form</h1>
-      <form action="/register" method="post">
-        <label htmlFor="username">Username: </label>
-        <input type="text" name="username" id="username" /><br />
-        <label htmlFor="password">Password: </label>
-        <input type="password" name="password" id="password" /><br />
-        <input type="submit" value="Register" />
+      <form action="">
+        <h1>Registration Form</h1>
+        <label htmlFor="EmployeeName">Employee Name</label>
+        <input type="text" value={DataTransfer.EmployeeName} />
       </form>
     </div>
-  );
+  )
 }
 
-export default RegForm;
+export default RegForm
+
