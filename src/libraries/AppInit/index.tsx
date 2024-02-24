@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import Logo from 'src/libraries/LogoSign';
+
 
 function AppInit() {
   return (
@@ -17,7 +17,6 @@ function AppInit() {
       alignItems="center"
       justifyContent="center"
     >
-      <Logo />
     </Box>
   );
 }

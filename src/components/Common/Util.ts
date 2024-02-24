@@ -146,8 +146,6 @@ export const getDateFormattedDash = (date) => {
 export const getCalendarFormat = (date) => {
   date = date || new Date();
   let Day = new Date(date).getDate();
-  console.log(new Date(date), "day in getCalendarFormat");
-
   let DayFormat = Day < 10 ? "0" + Day.toString() : Day.toString();
   let Month = new Date(date).getMonth();
   let MonthFormat = Month < 10 ? "0" + Month.toString() : Month.toString();

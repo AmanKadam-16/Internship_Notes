@@ -6,8 +6,8 @@ export interface IAddEmployeeBody {
     Gender: number,
     EmailId: string,
     PhoneNo: string,
-    DesignationName: string,
-    DID: number
+    DesignationName?: string,
+    DID?: number
 }
 export interface IGetEmployeeDetailsBody {
     ID: number,
