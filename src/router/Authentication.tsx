@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import AddEmployee from 'src/components/Employee/AddEmployee';
+import RegForm from 'src/components/Employee/RegForm';
 import SuspenseLoader from 'src/layouts/components/SuspenseLoader';
 
 const Loader = (Component) => (props) =>
@@ -48,7 +49,10 @@ const AuthenticationRoute = [
   {
     path: 'TermAndCondition',
     element: <TermAndCondition />
-  }
+  },
+  {
+    path:'RegForm',
+    element:<RegForm />  }
 ];
 
 export default AuthenticationRoute;
