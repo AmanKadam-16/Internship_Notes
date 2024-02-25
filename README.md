@@ -1,46 +1,105 @@
-# 02 - Soft Skill Session - Email Writing 📧
-# Adding a Signature in Gmail 
+# Soft - Skill Task | Aman Vijay Kadam
+---
+## Email Writing
 
-## Introduction
-Adding a signature to your Gmail account is a great way to personalize your emails and provide essential contact information. This documentation will guide you through the process and explain the two options available for applying your signature: "Append to new outgoing mails" and "Append to replies and forwards."
+## Task 1: 10 Starting lines of Email Writing.
 
-## Steps to Add a Signature in Gmail
+1. "Respected Sir/Madam,”
+2. “I hope this email finds you well.”
+3. “I am writing to inquire about…”
+4. “Thank you for your prompt response.”
+5. “I appreciate your attention to this matter.”
+6. “I wanted to follow up on our previous conversation.”
+7. “I am reaching out regarding…”
+8. “I apologize for any inconvenience.”
+9. “I am pleased to inform you that…”
+10. “Please find attached the requested document.”
+---
+## Task 2:
 
-### Step 1: Access Gmail Settings
-1. Open your Gmail account.
-2. In the top right corner, click on the gear icon (⚙️) and select "See all settings."
+**Subject:** Application for Web Development Internship at Aadi Technology
 
-### Step 2: Navigate to the "General" Tab
-3. In the settings menu, click on the "General" tab.
+Respected Hiring Manager,
 
-### Step 3: Scroll Down to the Signature Section
-4. Scroll down until you find the "Signature" section.
+I am writing to express my interest in the Web Development Internship position at Aadi Technology. As a recent graduate with a strong background in HTML, CSS, and JavaScript, I am eager to contribute my skills and learn from your experienced team. Attached, please find my resume for your consideration. I am excited about the opportunity to work with Aadi Technology and contribute to your innovative projects. Thank you for considering my application.
 
-### Step 4: Edit Signature
-5. Check the box next to "Insert this signature before quoted text in replies and remove the '--' line that precedes it."
-6. In the text box, add your signature:
-Example -
-```md
---
+Sincerely,
+Aman Kadam
+9359273782
+
+## Task 3:
+
+**Subject:** Acceptance of Internship Offer
+
+Respected Hiring Manager,
+
+I am thrilled to accept the internship offer for the Web Development position at Aadi Technology. I appreciate the opportunity and look forward to contributing to your team. Please let me know the next steps, including any paperwork or orientation details. Thank you once again for this exciting opportunity.
+
+Best regards,
+Aman Kadam
+9359273782
+
+## Task 4:
+
+**Subject:** Task Status Update
+
+Respected Team Leader,
+
+I wanted to provide an update on the tasks assigned to me. As of now:
+
+- Task A: Completed and tested.
+- Task B: In progress, estimated completion by 25th Feb.
+- Task C: Pending due to technical problems.
+
+Please let me know if you need any further information or adjustments. Thank you for your guidance.
+
 Regards,
 Aman Kadam,
 Intern,
 Aadi Technology,
-9359xxxx82.
-```
+9359273782.
 
-7. Feel free to customize the signature as per your preferences.
+## Task 5:
 
-### Step 5: Save Changes
-8. Scroll down to the bottom and click on "Save Changes" to apply your new signature.
+**Subject:** Project Meeting Schedule
 
-## Signature Options in Gmail
+Respected Hiring Manager,
 
-### Option 1: Append to New Outgoing Mails
-When you choose this option, your signature will be automatically added to the end of every new email you compose.
+I propose scheduling a project meeting on February 28th, 2024, at 11:00 a.m via Skype. The agenda will include plans on our future projects and management. Please confirm your availability, and I will send out a calendar invite accordingly.
 
-### Option 2: Append to Replies and Forwards
-By selecting this option, your signature will also be appended to the end of your replies and forwarded messages, maintaining a consistent and professional appearance across all your email interactions.
+Regards,
+Aman Kadam,
+Intern,
+Aadi Technology,
+9359273782.
 
-## Conclusion
-Adding a signature in Gmail is a simple yet effective way to enhance your email communication. Choose the option that best suits your preferences and maintain a professional image in all your correspondences.
+## Task 6:
+
+**Subject:** Leave Request for Family Function
+
+Respected Manager,
+
+I would like to request two days of leave from 25th Feb to 29th Feb for attending a family function. I will ensure all pending tasks are completed before my absence. Thank you for your understanding.
+
+Regards,
+Aman Kadam,
+Intern,
+Aadi Technology,
+9359273782.
+
+## Task 7:
+
+**Subject:** Request for Seminar Report
+
+Respected Manager,
+
+I regret to inform you that I missed the seminar held in January 2024. Could you please provide me with the seminar report or any relevant materials? I appreciate your assistance. Thank you.
+
+
+Regards,
+Aman Kadam,
+Intern,
+Aadi Technology,
+9359273782.
+
+/ / C O D E  _  R E D
