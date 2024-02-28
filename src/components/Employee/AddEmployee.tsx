@@ -78,7 +78,6 @@ const AddEmployee = () => {
         if (AddEmployeeMsg != "") {
             toast.success(AddEmployeeMsg)
             dispatch(resetAddEmployeeDetails())
-            navigate("../../EmployeeList")
         }
     }, [AddEmployeeMsg])
 
