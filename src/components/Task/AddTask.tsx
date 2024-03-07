@@ -153,7 +153,8 @@ const AddTask = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Dropdown ItemList={taskTypeList} Label={'Task Type'}
-                            DefaultValue={taskTypeId} ClickItem={clickTaskType} />
+                            DefaultValue={taskTypeId} ClickItem={clickTaskType} 
+                            ErrorMessage={TaskTypeErrorMessage} />
                     </Grid>
 
                     <Grid item xs={12}>

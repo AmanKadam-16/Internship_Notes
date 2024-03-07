@@ -1,7 +1,8 @@
 import { NativeSelect, Typography } from "@mui/material";
+import { ErrorDetail } from '../styled/ErrormessageStyled';
 
 
-const Dropdown = ({ ItemList, ClickItem, Label, DefaultValue }) => {
+const Dropdown = ({ ItemList, ClickItem, Label, DefaultValue,ErrorMessage = '' }) => {
     return (<>
         <Typography>{Label}</Typography>
         <NativeSelect value={DefaultValue}
@@ -14,6 +15,7 @@ const Dropdown = ({ ItemList, ClickItem, Label, DefaultValue }) => {
                 );
             })}
         </NativeSelect>
+        <ErrorDetail>{ErrorMessage}</ErrorDetail>
     </>)
 }
 
