@@ -10,7 +10,7 @@ export interface IAddTaskBody {
 
     TaskTypeId: number,
 
-    IsReminder: boolean,
+    IsReminder?: boolean,
 
     TaskSubjectName?: string,
 

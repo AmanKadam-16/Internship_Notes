@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import TaskApi from "src/api/Task/ApiTask";
-import { IGetTaskDetailsBody } from "src/interfaces/Task/ITask";
+import { IGetTaskDetailsBody,IAddTaskBody } from "src/interfaces/Task/ITask";
 import { AppThunk } from "src/store";
 
 
@@ -17,6 +17,14 @@ const Taskslice = createSlice({
         Loading: true
     },
     reducers: {
+        getAddTaskMsg(state, action) {
+            state.Loading = false;
+            state.AddTaskMsg = action.payload;
+        },
+        resetAddTaskDetails(state) {
+            state.Loading = false;
+            state.AddTaskMsg = "";
+        },
         getTaskSubjectList(state, action) {
             state.Loading = false;
             state.TaskSubjectList = action.payload;
@@ -35,6 +43,20 @@ const Taskslice = createSlice({
     }
 });
 
+export const AddTaskDetails =
+    (data: IAddTaskBody): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.AddTaskApi(data);
+            dispatch(Taskslice.actions.getAddTaskMsg(response.data));
+        };
+
+        export const resetAddTaskDetails =
+    (): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.resetAddTaskDetails());
+        };
+        
 export const getTaskDetails =
     (data: IGetTaskDetailsBody): AppThunk =>
         async (dispatch) => {

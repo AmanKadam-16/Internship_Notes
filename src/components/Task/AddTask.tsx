@@ -3,15 +3,19 @@ import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from '@mui/material/FormControlLabel'
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { toast } from 'react-toastify'
 import ButtonField from "src/libraries/Training/ButtonField"
 import CalendarField from "src/libraries/Training/CalendarField"
 import Dropdown from "src/libraries/Training/Dropdown"
 import InputField from "src/libraries/Training/InputField"
 import RadioList from "src/libraries/Training/RadioList"
 import PageHeader from "src/libraries/heading/PageHeader"
+import { IAddTaskBody } from "src/interfaces/Task/ITask"
 import {
     getTaskSubjectList,
-    getTaskTypeList
+    getTaskTypeList,
+    resetAddTaskDetails,
+    AddTaskDetails
 } from "src/requests/Task/RequestTask"
 import { RootState } from 'src/store'
 
@@ -21,6 +25,7 @@ const AddTask = () => {
     const [Id, setId] = useState('')
     const taskSubjectList = useSelector((state: RootState) => state.Task.TaskSubjectList);
     const taskTypeList = useSelector((state: RootState) => state.Task.TaskTypeList);
+    const AddTaskMsg = useSelector((state: RootState) => state.Task.AddTaskMsg);
 
     // const [taskSubjectList, setTaskSubjectList] = useState([
     //     { Id: 1, Name: 'SQL', Value: "1" },
@@ -44,6 +49,7 @@ const AddTask = () => {
     const [TaskTypeErrorMessage, setTaskTypeErrorMessage] = useState('')
     const [dateTimeErrorMessage, setdateTimeErrorMessage] = useState('')
     const [TaskNameErrorMessage, setTaskNameErrorMessage] = useState('')
+    
     /////
 
 
@@ -55,6 +61,16 @@ const AddTask = () => {
         // }
         // dispatch(getTaskDetails(GetTaskDetailsBody))
     }, [])
+
+    useEffect(() => {
+        if (AddTaskMsg != "") {
+            toast.success(AddTaskMsg)
+            dispatch(resetAddTaskDetails())
+            // ClearFormFields();
+            // navigate("../../EmployeeList")
+            // dispatch(getEmployeeList())
+        }
+    }, [AddTaskMsg])
 
     // useEffect(() => {
     //     dispatch(getTaskTypeList())
@@ -115,20 +131,17 @@ const AddTask = () => {
     }
     const clickSubmit = () => {
         if (IsFormValid()) {
-            // const AddEmployeeBody: IAddEmployeeBody = {
-            //     ID: Id == undefined ? 0 : Number(Id),
-            //     EmployeeName: EmployeeName,
-            //     BirthDate: BirthDate,
-            //     DesignationId: Number(DesignationId),
-            //     Gender: Number(Gender),
-            //     EmailId: EmailId,
-            //     PhoneNo: PhoneNo,
-            // }
-            // dispatch(AddEmployeeDetails(AddEmployeeBody))
-            alert("Task Created Successfully")
+            const AddTaskBody: IAddTaskBody = {
+                ID: Id == undefined ? 0 : Number(Id),
+                TaskName: taskName,
+                Tasktime: dateTime,
+                TaskSubjectId: Number(taskSubjectId),
+                TaskTypeId: Number(taskTypeId),
+                IsReminder: reminder
+            }
+            dispatch(AddTaskDetails(AddTaskBody))
+            // alert("Task Created Successfully")
         }
-
-
     }
     return (
         <Container>
