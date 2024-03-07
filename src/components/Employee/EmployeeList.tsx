@@ -11,7 +11,7 @@ import PageHeader from 'src/libraries/heading/PageHeader';
 import { deleteEmployeeDetails, getEmployeeList, resetDeleteEmployeeDetails } from "src/requests/Employee/RequestEmployee";
 import { RootState } from 'src/store';
 
-const EmployeeList = () => {
+const EmployeeList = ({ ClickItemList }) => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -34,17 +34,25 @@ const EmployeeList = () => {
         }
     }, [deleteEmployeedetailsMsg])
 
+
     const ClickItem = (value) => {
         if (value.Action == "Delete") {
-            const GetEmployeeDetailsBody: IGetEmployeeDetailsBody = {
-                ID: value.Id
+            if (window.confirm("Are you sure you want to delete this employee?")) {
+                const GetEmployeeDetailsBody: IGetEmployeeDetailsBody = {
+                    ID: value.Id
+                }
+                dispatch(deleteEmployeeDetails(GetEmployeeDetailsBody))
             }
-            dispatch(deleteEmployeeDetails(GetEmployeeDetailsBody))
         }
         if (value.Action == "Edit") {
             navigate("../AddEmployee/" + value.Id)
         }
+        if (value.Action == "Edit") {
+            ClickItemList(value.Id)
+            navigate("../" + value.Id)
+        }
     }
+
 
     return (
         <Container>

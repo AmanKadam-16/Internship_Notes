@@ -4,7 +4,7 @@ import PageHeader from "src/libraries/heading/PageHeader";
 const Home = () => {
     return (
         <Container>
-            <PageHeader heading={'Hi this is Code RED'} subheading={''} />
+            <PageHeader heading={'Hello World'} subheading={''} />
         </Container>
     )
 }

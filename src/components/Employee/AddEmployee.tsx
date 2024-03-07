@@ -1,4 +1,5 @@
 import { Container, Grid } from "@mui/material"
+import Divider from '@mui/material/Divider'
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from 'react-toastify'
@@ -8,18 +9,19 @@ import Dropdown from "src/libraries/Training/Dropdown"
 import InputField from "src/libraries/Training/InputField"
 import RadioList from "src/libraries/Training/RadioList"
 import PageHeader from "src/libraries/heading/PageHeader"
+import EmployeeList from "./EmployeeList"
 
 import { IAddEmployeeBody, IGetEmployeeDetailsBody } from "src/interfaces/Employee/IEmployee"
 import {
     AddEmployeeDetails, getDesignationList,
     getEmployeeDetails,
+    getEmployeeList,
     resetAddEmployeeDetails
 } from "src/requests/Employee/RequestEmployee"
 
 import { RootState } from 'src/store'
 import { IsEmailValid, IsPhoneNoValid, getCalendarFormat } from "../Common/Util"
 
-import { useParams } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -27,7 +29,7 @@ const AddEmployee = () => {
     const navigate = useNavigate();
 
 
-    const { Id } = useParams();
+    // const { Id } = useParams();
 
     const dispatch = useDispatch();
 
@@ -47,11 +49,20 @@ const AddEmployee = () => {
     const [EmailIdErrorMessage, setEmailIdErrorMessage] = useState('')
     const [PhoneNoErrorMessage, setPhoneNoErrorMessage] = useState('')
     const [GenderErrorMessage, setGenderErrorMessage] = useState('')
+    const [Id, setId] = useState('')
 
     const DesignationList = useSelector((state: RootState) => state.Employee.DesignationList);
     const AddEmployeeMsg = useSelector((state: RootState) => state.Employee.AddEmployeeMsg);
     const EmployeeDetails = useSelector((state: RootState) => state.Employee.EmployeeDetails);
 
+    const ClearFormFields = () => {
+        setEmployeeName('')
+        setBirthDate('')
+        setEmailId('')
+        setPhoneNo('')
+        setGender('')
+        setDesignationId('0')
+    }
 
     useEffect(() => {
         if (EmployeeDetails != null) {
@@ -71,18 +82,24 @@ const AddEmployee = () => {
         }
         dispatch(getEmployeeDetails(GetEmployeeDetailsBody))
 
-    }, [])
+    }, [Id])
 
 
     useEffect(() => {
         if (AddEmployeeMsg != "") {
             toast.success(AddEmployeeMsg)
             dispatch(resetAddEmployeeDetails())
+            ClearFormFields();
+            // navigate("../../EmployeeList")
+            dispatch(getEmployeeList())
         }
     }, [AddEmployeeMsg])
 
     const clickEmployeeName = (value) => {
         setEmployeeName(value)
+    }
+    const clickEmployee = (value) => {
+        setId(value)
     }
     const clickBirthDate = (value) => {
         setBirthDate(value)
@@ -165,8 +182,7 @@ const AddEmployee = () => {
                             ErrorMessage={BirthDateErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
-                        <Dropdown ItemList={DesignationList} Label={'Designation'} 
-                        DefaultValue={DesignationId}
+                        <Dropdown ItemList={DesignationList} Label={'Designation'} DefaultValue={DesignationId}
                             ClickItem={clickDesignation} />
                     </Grid>
                     <Grid item xs={12}>
@@ -181,14 +197,19 @@ const AddEmployee = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <RadioList ItemList={GenderList} Label={'Gender'}
-                         DefaultValue={Gender}
+                        <RadioList ItemList={GenderList} Label={'Gender'} DefaultValue={Gender}
                             ClickItem={clickGender}
                             ErrorMessage={GenderErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
                         <ButtonField Label={'Submit'} ClickItem={clickSubmit} />
                     </Grid>
+                </Grid> <br />
+                <Divider />
+                <br /><br />
+                <Grid item xs={12} md={6} >
+                    <EmployeeList ClickItemList={clickEmployee} />
+
                 </Grid>
             </Grid>
         </Container>
