@@ -75,38 +75,38 @@ const AddTask = () => {
     const handleCheckboxChange = (event) => {
         setReminder(event.target.checked);
     };
-    const clickSubmit = () => {
-        alert("Task Added Successfully")
-    }
+    // const clickSubmit = () => {
+    //     alert("Task Added Successfully")
+    // }
     const clickCancel = () => {
     }
 
 
     //////
-    // const IsFormValid = () => {
-    //     let returnVal = true
-    //     if (taskSubjectId == "0") {
-    //         setTaskSubjectErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (EmailIdErrorMessage != "" && EmailId == "") {
-    //         setEmailIdErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (PhoneNoErrorMessage != "" && PhoneNo == "") {
-    //         setPhoneNoErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (Gender == "0") {
-    //         setGenderErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (BirthDate == "") {
-    //         setBirthDateErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     return returnVal
-    // }
+    const IsFormValid = () => {
+        let returnVal = true
+        if (taskSubjectId == "0") {
+            setTaskSubjectErrorMessage("Field is mandatory")
+            returnVal = false
+        }
+        // if (EmailIdErrorMessage != "" && EmailId == "") {
+        //     setEmailIdErrorMessage("Field is mandatory")
+        //     returnVal = false
+        // }
+        // if (PhoneNoErrorMessage != "" && PhoneNo == "") {
+        //     setPhoneNoErrorMessage("Field is mandatory")
+        //     returnVal = false
+        // }
+        // if (Gender == "0") {
+        //     setGenderErrorMessage("Field is mandatory")
+        //     returnVal = false
+        // }
+        // if (BirthDate == "") {
+        //     setBirthDateErrorMessage("Field is mandatory")
+        //     returnVal = false
+        // }
+        return returnVal
+    }
     // const clickSubmit = () => {
     //     if (IsFormValid()) {
     //         const AddEmployeeBody: IAddEmployeeBody = {
