@@ -40,6 +40,9 @@ const AddTask = () => {
     const [dateTime, setDateTime] = useState("")
     const [reminder, setReminder] = useState(false)
     //////
+    const [TaskSubjectErrorMessage, setTaskSubjectErrorMessage] = useState('')
+    const [TaskTypeErrorMessage, setTaskTypeErrorMessage] = useState('')
+    /////
 
 
     useEffect(() => {
@@ -83,12 +86,16 @@ const AddTask = () => {
 
 
     //////
-    // const IsFormValid = () => {
-    //     let returnVal = true
-    //     if (taskSubjectId == "0") {
-    //         setTaskSubjectErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
+    const IsFormValid = () => {
+        let returnVal = true
+        if (taskSubjectId == "0") {
+            setTaskSubjectErrorMessage("Field is mandatory")
+            returnVal = false
+        }
+        if (taskTypeId == "0") {
+            setTaskTypeErrorMessage("Field is mandatory")
+            returnVal = false
+        }
     //     // if (EmailIdErrorMessage != "" && EmailId == "") {
     //     //     setEmailIdErrorMessage("Field is mandatory")
     //     //     returnVal = false
@@ -105,22 +112,23 @@ const AddTask = () => {
     //     //     setBirthDateErrorMessage("Field is mandatory")
     //     //     returnVal = false
     //     // }
-    //     return returnVal
-    // }
+        return returnVal
+    }
     const clickSubmit = () => {
-        // if (IsFormValid()) {
-        //     const AddEmployeeBody: IAddEmployeeBody = {
-        //         ID: Id == undefined ? 0 : Number(Id),
-        //         EmployeeName: EmployeeName,
-        //         BirthDate: BirthDate,
-        //         DesignationId: Number(DesignationId),
-        //         Gender: Number(Gender),
-        //         EmailId: EmailId,
-        //         PhoneNo: PhoneNo,
-        //     }
-        //     dispatch(AddEmployeeDetails(AddEmployeeBody))
-        // }
-        alert("Task Created Successfully")
+        if (IsFormValid()) {
+            // const AddEmployeeBody: IAddEmployeeBody = {
+            //     ID: Id == undefined ? 0 : Number(Id),
+            //     EmployeeName: EmployeeName,
+            //     BirthDate: BirthDate,
+            //     DesignationId: Number(DesignationId),
+            //     Gender: Number(Gender),
+            //     EmailId: EmailId,
+            //     PhoneNo: PhoneNo,
+            // }
+            // dispatch(AddEmployeeDetails(AddEmployeeBody))
+            alert("Task Created Successfully")
+        }
+
 
     }
     return (
@@ -132,7 +140,8 @@ const AddTask = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <RadioList ItemList={taskSubjectList} Label={'Task Subject'}
-                            DefaultValue={taskSubjectId} ClickItem={clickTaskSubject} />
+                            DefaultValue={taskSubjectId} ClickItem={clickTaskSubject} 
+                            ErrorMessage={TaskSubjectErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
                         <InputField Item={taskName} Label={'Task Name'}
@@ -154,7 +163,7 @@ const AddTask = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <a href="../../AddTask"><ButtonField Label={'Submit'} ClickItem={clickSubmit} /></a> &nbsp;&nbsp;
+                        <ButtonField Label={'Submit'} ClickItem={clickSubmit} /> &nbsp;&nbsp;
                         <a href="../../AddTask"><ButtonField Label={'Cancel'} ClickItem={clickCancel} /></a>
                     </Grid>
                     <Grid item xs={12}>
