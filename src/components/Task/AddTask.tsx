@@ -83,44 +83,44 @@ const AddTask = () => {
 
 
     //////
-    const IsFormValid = () => {
-        let returnVal = true
-        if (taskSubjectId == "0") {
-            setTaskSubjectErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (EmailIdErrorMessage != "" && EmailId == "") {
-            setEmailIdErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (PhoneNoErrorMessage != "" && PhoneNo == "") {
-            setPhoneNoErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (Gender == "0") {
-            setGenderErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (BirthDate == "") {
-            setBirthDateErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        return returnVal
-    }
-    const clickSubmit = () => {
-        if (IsFormValid()) {
-            const AddEmployeeBody: IAddEmployeeBody = {
-                ID: Id == undefined ? 0 : Number(Id),
-                EmployeeName: EmployeeName,
-                BirthDate: BirthDate,
-                DesignationId: Number(DesignationId),
-                Gender: Number(Gender),
-                EmailId: EmailId,
-                PhoneNo: PhoneNo,
-            }
-            dispatch(AddEmployeeDetails(AddEmployeeBody))
-        }
-    }
+    // const IsFormValid = () => {
+    //     let returnVal = true
+    //     if (taskSubjectId == "0") {
+    //         setTaskSubjectErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (EmailIdErrorMessage != "" && EmailId == "") {
+    //         setEmailIdErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (PhoneNoErrorMessage != "" && PhoneNo == "") {
+    //         setPhoneNoErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (Gender == "0") {
+    //         setGenderErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (BirthDate == "") {
+    //         setBirthDateErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     return returnVal
+    // }
+    // const clickSubmit = () => {
+    //     if (IsFormValid()) {
+    //         const AddEmployeeBody: IAddEmployeeBody = {
+    //             ID: Id == undefined ? 0 : Number(Id),
+    //             EmployeeName: EmployeeName,
+    //             BirthDate: BirthDate,
+    //             DesignationId: Number(DesignationId),
+    //             Gender: Number(Gender),
+    //             EmailId: EmailId,
+    //             PhoneNo: PhoneNo,
+    //         }
+    //         dispatch(AddEmployeeDetails(AddEmployeeBody))
+    //     }
+    // }
     return (
         <Container>
             <Grid container direction="column" alignItems="center" justifyContent="center">
