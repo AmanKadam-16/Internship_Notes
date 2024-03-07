@@ -42,6 +42,7 @@ const AddTask = () => {
     //////
     const [TaskSubjectErrorMessage, setTaskSubjectErrorMessage] = useState('')
     const [TaskTypeErrorMessage, setTaskTypeErrorMessage] = useState('')
+    const [dateTimeErrorMessage, setdateTimeErrorMessage] = useState('')
     /////
 
 
@@ -94,6 +95,10 @@ const AddTask = () => {
         }
         if (taskTypeId == "0") {
             setTaskTypeErrorMessage("Field is mandatory")
+            returnVal = false
+        }
+        if (dateTime == "0") {
+            setdateTimeErrorMessage("Field is mandatory")
             returnVal = false
         }
     //     // if (EmailIdErrorMessage != "" && EmailId == "") {
@@ -149,7 +154,8 @@ const AddTask = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <CalendarField Item={dateTime} Label={'Date & Time'}
-                            ClickItem={clickDateTime} />
+                            ClickItem={clickDateTime} 
+                            ErrorMessage={dateTimeErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
                         <Dropdown ItemList={taskTypeList} Label={'Task Type'}
