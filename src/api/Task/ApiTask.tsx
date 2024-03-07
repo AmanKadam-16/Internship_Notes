@@ -15,10 +15,15 @@ const GetTaskDetailsApi = (data: IGetTaskDetailsBody) => {
     return http.post<IAddTaskBody>('GetEmployeeDetails', data);
 };
 
+const AddTaskApi = (data: IAddTaskBody) => {
+    return http.post<string>('AddTasks', data);
+  };
+
 const TaskApi = {
     GetTaskSubjectListApi,
     GetTaskDetailsApi,
-    GetTaskTypeListApi
+    GetTaskTypeListApi,
+    AddTaskApi
 }
 
 export default TaskApi;

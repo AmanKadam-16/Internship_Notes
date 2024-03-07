@@ -43,6 +43,7 @@ const AddTask = () => {
     const [TaskSubjectErrorMessage, setTaskSubjectErrorMessage] = useState('')
     const [TaskTypeErrorMessage, setTaskTypeErrorMessage] = useState('')
     const [dateTimeErrorMessage, setdateTimeErrorMessage] = useState('')
+    const [TaskNameErrorMessage, setTaskNameErrorMessage] = useState('')
     /////
 
 
@@ -97,26 +98,19 @@ const AddTask = () => {
             setTaskTypeErrorMessage("Field is mandatory")
             returnVal = false
         }
-        if (dateTime == "0") {
+        if (dateTime == "") {
             setdateTimeErrorMessage("Field is mandatory")
             returnVal = false
         }
-    //     // if (EmailIdErrorMessage != "" && EmailId == "") {
-    //     //     setEmailIdErrorMessage("Field is mandatory")
-    //     //     returnVal = false
-    //     // }
-    //     // if (PhoneNoErrorMessage != "" && PhoneNo == "") {
-    //     //     setPhoneNoErrorMessage("Field is mandatory")
-    //     //     returnVal = false
-    //     // }
-    //     // if (Gender == "0") {
-    //     //     setGenderErrorMessage("Field is mandatory")
-    //     //     returnVal = false
-    //     // }
-    //     // if (BirthDate == "") {
-    //     //     setBirthDateErrorMessage("Field is mandatory")
-    //     //     returnVal = false
-    //     // }
+        if (dateTime == "") {
+            setdateTimeErrorMessage("Field is mandatory")
+            returnVal = false
+        }
+        if (taskName == "") {
+            setTaskNameErrorMessage("Field is mandatory")
+            returnVal = false
+        }
+/////////
         return returnVal
     }
     const clickSubmit = () => {
@@ -150,7 +144,8 @@ const AddTask = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <InputField Item={taskName} Label={'Task Name'}
-                            ClickItem={clickTaskName} />
+                            ClickItem={clickTaskName} 
+                            ErrorMessage={TaskNameErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
                         <CalendarField Item={dateTime} Label={'Date & Time'}
