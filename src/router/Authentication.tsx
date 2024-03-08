@@ -57,6 +57,10 @@ const AuthenticationRoute = [
     element: <AddTask />
   },
   {
+    path: 'AddTask/:Id',
+    element: <AddTask />
+  },
+  {
     path: 'TasksList',
     element: <TasksList />
   },

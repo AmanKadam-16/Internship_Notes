@@ -10,22 +10,29 @@ import Dropdown from "src/libraries/Training/Dropdown"
 import InputField from "src/libraries/Training/InputField"
 import RadioList from "src/libraries/Training/RadioList"
 import PageHeader from "src/libraries/heading/PageHeader"
-import { IAddTaskBody } from "src/interfaces/Task/ITask"
+import TasksList from "./TasksList"
+import { IAddTaskBody,IGetTaskDetailsBody } from "src/interfaces/Task/ITask"
 import {
     getTaskSubjectList,
     getTaskTypeList,
     resetAddTaskDetails,
-    AddTaskDetails
+    AddTaskDetails,
+    getTasksList
 } from "src/requests/Task/RequestTask"
 import { RootState } from 'src/store'
+import { useNavigate } from 'react-router-dom'
+import {getCalendarFormat } from "../Common/Util"
 
 
 const AddTask = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [Id, setId] = useState('')
     const taskSubjectList = useSelector((state: RootState) => state.Task.TaskSubjectList);
     const taskTypeList = useSelector((state: RootState) => state.Task.TaskTypeList);
     const AddTaskMsg = useSelector((state: RootState) => state.Task.AddTaskMsg);
+    const TaskDetails = useSelector((state: RootState) => state.Task.TaskDetails);
+
 
     // const [taskSubjectList, setTaskSubjectList] = useState([
     //     { Id: 1, Name: 'SQL', Value: "1" },
@@ -68,7 +75,7 @@ const AddTask = () => {
             dispatch(resetAddTaskDetails())
             // ClearFormFields();
             // navigate("../../EmployeeList")
-            // dispatch(getEmployeeList())
+            dispatch(getTasksList())
         }
     }, [AddTaskMsg])
 
@@ -80,9 +87,23 @@ const AddTask = () => {
     //     // dispatch(getTaskDetails(GetTaskDetailsBody))
     // }, [])
 
+    useEffect(() => {
+        if (TaskDetails != null) {
+            setTask(TaskDetails.EmployeeName)
+            setDateTime(getCalendarFormat(TaskDetails.dateTime))
+            setTaskSubjectId(TaskDetails.taskSubectId)
+            setTaskTypeId(TaskDetails.taskTypeId)
+            setReminder(TaskDetails.reminder)
+        }
+    }, [TaskDetails])
+
+
     ///////
     const clickTaskSubject = (value) => {
         setTaskSubjectId(value)
+    }
+    const clickTask = (value) => {
+        setId(value)
     }
     const clickTaskName = (value) => {
         setTask(value)
@@ -184,6 +205,11 @@ const AddTask = () => {
                     <Grid item xs={12}>
 
                     </Grid>
+                </Grid>
+                <br /><br /><br />
+                <Grid item xs={12} md={6} >
+                    <TasksList ClickItemList={clickTask} />
+
                 </Grid>
             </Grid>
         </Container>

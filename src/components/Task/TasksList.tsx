@@ -58,7 +58,7 @@ const TasksList = ({ ClickItemList }) => {
         <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <PageHeader heading={'Employee List'} subheading={''} />
+                    <PageHeader heading={'Task List'} subheading={''} />
                 </Grid>
                 <Grid item xs={12}>
                     <DynamicList HeaderList={HeaderList} ItemList={TasksList}
