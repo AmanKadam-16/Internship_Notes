@@ -17,7 +17,8 @@ import {
     getTaskTypeList,
     resetAddTaskDetails,
     AddTaskDetails,
-    getTasksList
+    getTasksList,
+    getTaskDetails
 } from "src/requests/Task/RequestTask"
 import { RootState } from 'src/store'
 import { useNavigate } from 'react-router-dom'
@@ -63,11 +64,11 @@ const AddTask = () => {
     useEffect(() => {
         dispatch(getTaskSubjectList())
         dispatch(getTaskTypeList())
-        // const GetTaskDetailsBody: IGetTaskDetailsBody = {
-        //     ID: Number(Id)
-        // }
-        // dispatch(getTaskDetails(GetTaskDetailsBody))
-    }, [])
+        const GetTaskDetailsBody: IGetTaskDetailsBody = {
+            ID: Number(Id)
+        }
+        dispatch(getTaskDetails(GetTaskDetailsBody))
+    }, [Id])
 
     useEffect(() => {
         if (AddTaskMsg != "") {
@@ -89,7 +90,7 @@ const AddTask = () => {
 
     useEffect(() => {
         if (TaskDetails != null) {
-            setTask(TaskDetails.EmployeeName)
+            setTask(TaskDetails.TaskName)
             setDateTime(getCalendarFormat(TaskDetails.dateTime))
             setTaskSubjectId(TaskDetails.taskSubectId)
             setTaskTypeId(TaskDetails.taskTypeId)
