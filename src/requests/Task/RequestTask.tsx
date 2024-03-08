@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import TaskApi from "src/api/Task/ApiTask";
-import { IGetTaskDetailsBody,IAddTaskBody } from "src/interfaces/Task/ITask";
+import { IGetTaskDetailsBody, IAddTaskBody } from "src/interfaces/Task/ITask";
 import { AppThunk } from "src/store";
 
 
@@ -8,7 +8,7 @@ const Taskslice = createSlice({
     name: 'Task',
     initialState: {
         AddTaskMsg: '',
-        TaskList: [],
+        TasksList: [],
         TaskDetails: null,
         updateTaskdetailsMsg: '',
         deleteTaskdetailsMsg: '',
@@ -17,6 +17,10 @@ const Taskslice = createSlice({
         Loading: true
     },
     reducers: {
+        getTasksList(state, action) {
+            state.Loading = false;
+            state.TasksList = action.payload;
+        },
         getAddTaskMsg(state, action) {
             state.Loading = false;
             state.AddTaskMsg = action.payload;
@@ -40,6 +44,18 @@ const Taskslice = createSlice({
             state.Loading = false;
             state.TaskDetails = action.payload;
         },
+        updateTaskdetails(state, action) {
+            state.Loading = false;
+            state.updateTaskdetailsMsg = action.payload;
+        },
+        deleteTaskdetails(state, action) {
+            state.Loading = false;
+            state.deleteTaskdetailsMsg = action.payload;
+        },
+        resetDeleteTaskDetails(state) {
+            state.Loading = false;
+            state.deleteTaskdetailsMsg = "";
+        },
     }
 });
 
@@ -51,12 +67,12 @@ export const AddTaskDetails =
             dispatch(Taskslice.actions.getAddTaskMsg(response.data));
         };
 
-        export const resetAddTaskDetails =
+export const resetAddTaskDetails =
     (): AppThunk =>
         async (dispatch) => {
             dispatch(Taskslice.actions.resetAddTaskDetails());
         };
-        
+
 export const getTaskDetails =
     (data: IGetTaskDetailsBody): AppThunk =>
         async (dispatch) => {
@@ -96,4 +112,42 @@ export const getTaskTypeList =
             dispatch(Taskslice.actions.getTaskTypeList(responseData));
         };
 
+export const getTasksList =
+    (): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.GetTaskListApi();
+            const responseData = response.data.map((Item, i) => {
+                return {
+                    Id: Item.ID,
+                    Text1: Item.TaskSubjectName,
+                    Text2: Item.TaskName,
+                    Text3: Item.Tasktime,
+                    Text4: Item.TaskTypeName
+                };
+            });
+            dispatch(Taskslice.actions.getTasksList(responseData));
+        };
+
+export const updateTaskDetails =
+    (data: IAddTaskBody): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.UpdateTaskdetailsApi(data);
+            dispatch(Taskslice.actions.updateTaskdetails(response.data));
+        };
+
+export const deleteTaskDetails =
+    (data: IGetTaskDetailsBody): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.DeleteTaskdetailsApi(data);
+            dispatch(Taskslice.actions.deleteTaskdetails(response.data));
+        };
+
+export const resetDeleteTaskDetails =
+    (): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.resetDeleteTaskDetails());
+        };
 export default Taskslice.reducer;

@@ -17,6 +17,9 @@ const Loader = (Component) => (props) =>
 const TermAndCondition = Loader(lazy(() =>
   import('src/components/Authentication/TermAndConditions/TermAndCondition')
 ));
+const TasksList = Loader(lazy(() =>
+  import('src/components/Task/TasksList')
+));
 const EmployeeList = Loader(lazy(() =>
   import('src/components/Employee/EmployeeList')
 ));
@@ -52,7 +55,11 @@ const AuthenticationRoute = [
   {
     path: 'AddTask',
     element: <AddTask />
-  }
+  },
+  {
+    path: 'TasksList',
+    element: <TasksList />
+  },
 ];
 
 export default AuthenticationRoute;
