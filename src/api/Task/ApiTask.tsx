@@ -12,7 +12,7 @@ const GetTaskTypeListApi = () => {
 };
 
 const GetTaskDetailsApi = (data: IGetTaskDetailsBody) => {
-    return http.post<IAddTaskBody>('GetEmployeeDetails', data);
+    return http.post<IAddTaskBody>('GetTaskDetails', data);
 };
 
 const AddTaskApi = (data: IAddTaskBody) => {
