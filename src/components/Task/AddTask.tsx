@@ -29,11 +29,12 @@ const AddTask = () => {
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [Id, setId] = useState('')
+    const [Id, setId] = useState('');
     const taskSubjectList = useSelector((state: RootState) => state.Task.TaskSubjectList);
     const taskTypeList = useSelector((state: RootState) => state.Task.TaskTypeList);
     const AddTaskMsg = useSelector((state: RootState) => state.Task.AddTaskMsg);
     const TaskDetails = useSelector((state: RootState) => state.Task.TaskDetails);
+
 
 
     // const [taskSubjectList, setTaskSubjectList] = useState([
@@ -48,9 +49,9 @@ const AddTask = () => {
     //     { Id: 3, Name: 'Assignment', Value: "3" }
     // ]
     // )
-    const [headerMsg,setHearderMsg] = useState("")
+    const [headerMsg,setHearderMsg] = useState("Add Task")
     const [taskSubjectId, setTaskSubjectId] = useState("0")
-    const [taskTypeId, setTaskTypeId] = useState("0")
+    const [taskTypeId, setTaskTypeId] = useState("1")
     const [taskName, setTask] = useState("")
     const [dateTime, setDateTime] = useState("")
     const [reminder, setReminder] = useState(false)
@@ -79,6 +80,7 @@ const AddTask = () => {
                 // navigate("../../EmployeeList")
                 dispatch(getTasksList())
                 ClearFormFields();
+                // setHearderMsg('Add Task')
             }  
 
     }, [AddTaskMsg])
@@ -93,19 +95,19 @@ const AddTask = () => {
         }
     }, [TaskDetails])
 
-    useEffect(() => {
-        if (Id===undefined) {
-            setHearderMsg('Add Task');
-        } else {
-            setHearderMsg('Edit Task');
-        }
-    }, [Id]);
+    // useEffect(() => {
+    //     if (Id==='') {
+    //         setHearderMsg('Add Task');
+    //     } else {
+    //         setHearderMsg('Edit Task');
+    //     }
+    // }, [Id]);
     ////////
     const ClearFormFields = () => {
         setTask('')
         setDateTime('')
         setTaskSubjectId('0')
-        setTaskTypeId('0')
+        setTaskTypeId('1')
         setReminder(false)
         setTaskNameErrorMessage('')
         setdateTimeErrorMessage('')
@@ -159,12 +161,12 @@ const AddTask = () => {
         } else {
             setdateTimeErrorMessage("");
         }
-        if (taskTypeId === "0") {
-            setTaskTypeErrorMessage("Field is mandatory");
-            returnVal = false;
-        } else {
-            setTaskTypeErrorMessage("");
-        }
+        // if (taskTypeId =="0") {
+        //     setTaskTypeErrorMessage("Field is mandatory");
+        //     returnVal = false;
+        // } else {
+        //     setTaskTypeErrorMessage("");
+        // }
         return returnVal;
     }
     
@@ -172,7 +174,7 @@ const AddTask = () => {
     const clickSubmit = () => {
         if (IsFormValid()) {
             const AddTaskBody: IAddTaskBody = {
-                ID: Id == undefined ? 0 : Number(Id),
+                ID: Id == '' ? 0 : Number(Id),
                 TaskName: taskName,
                 Tasktime: dateTime,
                 TaskSubjectId: Number(taskSubjectId),
@@ -181,6 +183,7 @@ const AddTask = () => {
             }
             dispatch(AddTaskDetails(AddTaskBody))
             navigate("/AddTask/")
+            // setHearderMsg('')
         }
     }
     return (
