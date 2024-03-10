@@ -53,10 +53,10 @@ const AddTask = () => {
     const [dateTime, setDateTime] = useState("")
     const [reminder, setReminder] = useState(false)
     //////
-    const [TaskSubjectErrorMessage, setTaskSubjectErrorMessage] = useState('')
-    const [TaskTypeErrorMessage, setTaskTypeErrorMessage] = useState('')
-    const [dateTimeErrorMessage, setdateTimeErrorMessage] = useState('')
-    const [TaskNameErrorMessage, setTaskNameErrorMessage] = useState('')
+    const [TaskSubjectErrorMessage, setTaskSubjectErrorMessage] = useState("")
+    const [TaskTypeErrorMessage, setTaskTypeErrorMessage] = useState("")
+    const [dateTimeErrorMessage, setdateTimeErrorMessage] = useState("")
+    const [TaskNameErrorMessage, setTaskNameErrorMessage] = useState("")
     
     /////
 
@@ -91,13 +91,20 @@ const AddTask = () => {
     useEffect(() => {
         if (TaskDetails != null) {
             setTask(TaskDetails.TaskName)
-            setDateTime(getCalendarFormat(TaskDetails.dateTime))
-            setTaskSubjectId(TaskDetails.taskSubectId)
-            setTaskTypeId(TaskDetails.taskTypeId)
-            setReminder(TaskDetails.reminder)
+            setDateTime(getCalendarFormat(TaskDetails.Tasktime))
+            setTaskSubjectId(TaskDetails.TaskSubjectId)
+            setTaskTypeId(TaskDetails.TaskTypeId)
+            setReminder(TaskDetails.IsReminder)
         }
     }, [TaskDetails])
-
+    ////////
+    const ClearFormFields = () => {
+        setTask('')
+        setDateTime('')
+        setTaskSubjectId('0')
+        setTaskTypeId('0')
+        setReminder(false)
+    }
 
     ///////
     const clickTaskSubject = (value) => {
@@ -122,29 +129,42 @@ const AddTask = () => {
     //     alert("Task Added Successfully")
     // }
     const clickCancel = () => {
+        ClearFormFields();
     }
 
 
     //////
+    // const IsFormValid = () => {
+    //     let returnVal = true
+    //     if (taskSubjectId == "0") {
+    //         setTaskSubjectErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (taskTypeId == "0") {
+    //         setTaskTypeErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (dateTime == "") {
+    //         setdateTimeErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (dateTime == "") {
+    //         setdateTimeErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (taskName == "") {
+    //         setTaskNameErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+
+    //
     const IsFormValid = () => {
         let returnVal = true
-        if (taskSubjectId == "0") {
+        if (taskSubjectId == "" && taskTypeId == ""
+        && dateTime == "" && taskName == "") {
             setTaskSubjectErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (taskTypeId == "0") {
             setTaskTypeErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (dateTime == "") {
             setdateTimeErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (dateTime == "") {
-            setdateTimeErrorMessage("Field is mandatory")
-            returnVal = false
-        }
-        if (taskName == "") {
             setTaskNameErrorMessage("Field is mandatory")
             returnVal = false
         }
@@ -162,6 +182,7 @@ const AddTask = () => {
                 IsReminder: reminder
             }
             dispatch(AddTaskDetails(AddTaskBody))
+            ClearFormFields();
             // alert("Task Created Successfully")
         }
     }
@@ -201,7 +222,7 @@ const AddTask = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <ButtonField Label={'Submit'} ClickItem={clickSubmit} /> &nbsp;&nbsp;
-                        <a href="../../AddTask"><ButtonField Label={'Cancel'} ClickItem={clickCancel} /></a>
+                        <ButtonField Label={'Cancel'} ClickItem={clickCancel} />
                     </Grid>
                     <Grid item xs={12}>
 

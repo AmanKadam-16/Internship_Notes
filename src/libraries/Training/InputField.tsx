@@ -8,7 +8,7 @@ const InputField = ({ Item, Label, ErrorMessage = ''
         <Typography>{Label}</Typography>
         <TextField value={Item}
             onChange={(e) => { ClickItem(e.target.value) }}
-            onBlur={BlurItem} />
+            onBlur={BlurItem} required />
         <ErrorDetail>{ErrorMessage}</ErrorDetail>
     </>
     )

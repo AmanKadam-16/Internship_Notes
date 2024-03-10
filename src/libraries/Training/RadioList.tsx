@@ -7,7 +7,7 @@ const RadioList = ({ ItemList, ClickItem, Label, DefaultValue, ErrorMessage = ''
 
     return (<>
         <Typography>{Label}</Typography>
-        <RadioGroup value={DefaultValue} onChange={(e) => ClickItem(e.target.value)}>
+        <RadioGroup value={DefaultValue} onChange={(e) => ClickItem(e.target.value)} >
             <div>
 
                 {ItemList?.map((Item, i) => {
