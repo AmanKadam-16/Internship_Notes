@@ -82,6 +82,7 @@
     "react-calendar": "^3.7.0",
     "react-chartjs-2": "^4.0.1",
     "react-circular-progressbar": "2.0.4",
+    "react-country-state-city": "^1.1.0",
     "react-countup": "6.1.0",
     "react-custom-scrollbars-2": "4.4.0",
     "react-dom": "17.0.2",
