@@ -1,19 +1,19 @@
 import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
 import { Container, Grid } from '@mui/material';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IGetTaskDetailsBody,IAddTaskBody } from 'src/interfaces/Task/ITask';
 import DynamicList from 'src/libraries/Training/DynamicList';
 import PageHeader from 'src/libraries/heading/PageHeader';
+import AddTask from 'src/components/Task/AddTask'
 import { deleteTaskDetails, getTasksList, resetDeleteTaskDetails } from "src/requests/Task/RequestTask";
 import { RootState } from 'src/store';
 
-const TasksList = ({ ClickItemList }) => {
+const TasksList = ({taskId}) => {
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
     const TasksList = useSelector((state: RootState) => state.Task.TasksList);
     const deleteTaskdetailsMsg = useSelector((state: RootState) =>
@@ -48,7 +48,7 @@ const TasksList = ({ ClickItemList }) => {
         //     navigate("../AddTask/" + value.Id)
         // }
         if (value.Action == "Edit") {
-            ClickItemList(value.Id)
+            taskId(value.Id)
             navigate("/AddTask/" + value.Id)
             // navigate("/AddTask")
         }

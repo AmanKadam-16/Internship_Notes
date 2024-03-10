@@ -106,6 +106,7 @@ const AddTask = () => {
     const ClearFormFields = () => {
         setTask('')
         setDateTime('')
+        setId('')
         setTaskSubjectId('0')
         setTaskTypeId('1')
         setReminder(false)
@@ -113,6 +114,7 @@ const AddTask = () => {
         setdateTimeErrorMessage('')
         setTaskTypeErrorMessage('')
         setTaskSubjectErrorMessage('')
+        console.log(TaskDetails)
     }
 
     ///////
@@ -122,6 +124,7 @@ const AddTask = () => {
     const clickTask = (value) => {
         setId(value)
     }
+
     const clickTaskName = (value) => {
         setTask(value)
     }
@@ -230,7 +233,9 @@ const AddTask = () => {
                 </Grid>
                 <br /><br /><br />
                 <Grid item xs={12} md={6} >
-                    <TasksList ClickItemList={clickTask} />
+                    <TasksList taskId={clickTask} />
+                    
+                    {/* <TasksList /> */}
 
                 </Grid>
             </Grid>
