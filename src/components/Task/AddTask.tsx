@@ -135,29 +135,10 @@ const AddTask = () => {
     //     alert("Task Added Successfully")
     // }
     const clickCancel = () => {
+        navigate("/AddTask/")
         ClearFormFields();
     }
 
-
-    // //////
-    // const IsFormValid = () => {
-    //     let returnVal = true
-    //     if (taskSubjectId === "0") {
-    //         setTaskSubjectErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     } 
-    //     if (taskName === "") {
-    //         setTaskNameErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (dateTime === "") {
-    //         setdateTimeErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (taskTypeId === "0") {
-    //         setTaskTypeErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
 
     const IsFormValid = () => {
         let returnVal = true;

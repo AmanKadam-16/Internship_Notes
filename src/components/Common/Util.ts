@@ -147,7 +147,7 @@ export const getCalendarFormat = (date) => {
   date = date || new Date();
   let Day = new Date(date).getDate();
   let DayFormat = Day < 10 ? "0" + Day.toString() : Day.toString();
-  let Month = new Date(date).getMonth();
+  let Month = new Date(date).getMonth()+1;
   let MonthFormat = Month < 10 ? "0" + Month.toString() : Month.toString();
   const Year = new Date(date).getFullYear();
   return `${Year}-${MonthFormat}-${DayFormat}`;

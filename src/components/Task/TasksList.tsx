@@ -49,7 +49,7 @@ const TasksList = ({ ClickItemList }) => {
         // }
         if (value.Action == "Edit") {
             ClickItemList(value.Id)
-            navigate("./" + value.Id)
+            navigate("/AddTask/" + value.Id)
         }
     }
 
