@@ -71,13 +71,15 @@ const AddTask = () => {
     }, [Id])
 
     useEffect(() => {
-        if (AddTaskMsg != "") {
-            toast.success(AddTaskMsg)
-            dispatch(resetAddTaskDetails())
-            // ClearFormFields();
-            // navigate("../../EmployeeList")
-            dispatch(getTasksList())
-        }
+            if (AddTaskMsg != "") {
+
+                toast.success(AddTaskMsg)
+                dispatch(resetAddTaskDetails())
+                // navigate("../../EmployeeList")
+                dispatch(getTasksList())
+                ClearFormFields();
+            }  
+
     }, [AddTaskMsg])
 
     // useEffect(() => {
@@ -104,6 +106,10 @@ const AddTask = () => {
         setTaskSubjectId('0')
         setTaskTypeId('0')
         setReminder(false)
+        setTaskNameErrorMessage('')
+        setdateTimeErrorMessage('')
+        setTaskTypeErrorMessage('')
+        setTaskSubjectErrorMessage('')
     }
 
     ///////
@@ -133,44 +139,69 @@ const AddTask = () => {
     }
 
 
-    //////
+    // //////
     // const IsFormValid = () => {
     //     let returnVal = true
-    //     if (taskSubjectId == "0") {
+    //     if (taskSubjectId === "0") {
     //         setTaskSubjectErrorMessage("Field is mandatory")
     //         returnVal = false
-    //     }
-    //     if (taskTypeId == "0") {
-    //         setTaskTypeErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (dateTime == "") {
-    //         setdateTimeErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (dateTime == "") {
-    //         setdateTimeErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-    //     if (taskName == "") {
+    //     } 
+    //     if (taskName === "") {
     //         setTaskNameErrorMessage("Field is mandatory")
     //         returnVal = false
     //     }
+    //     if (dateTime === "") {
+    //         setdateTimeErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+    //     if (taskTypeId === "0") {
+    //         setTaskTypeErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
+
+    const IsFormValid = () => {
+        let returnVal = true;
+        if (taskSubjectId === "0") {
+            setTaskSubjectErrorMessage("Field is mandatory");
+            returnVal = false;
+        } else {
+            setTaskSubjectErrorMessage("");
+        }
+        if (taskName === "") {
+            setTaskNameErrorMessage("Field is mandatory");
+            returnVal = false;
+        } else {
+            setTaskNameErrorMessage("");
+        }
+        if (dateTime === "") {
+            setdateTimeErrorMessage("Field is mandatory");
+            returnVal = false;
+        } else {
+            setdateTimeErrorMessage("");
+        }
+        if (taskTypeId === "0") {
+            setTaskTypeErrorMessage("Field is mandatory");
+            returnVal = false;
+        } else {
+            setTaskTypeErrorMessage("");
+        }
+        return returnVal;
+    }
+    
 
     //
-    const IsFormValid = () => {
-        let returnVal = true
-        if (taskSubjectId == "" && taskTypeId == ""
-        && dateTime == "" && taskName == "") {
-            setTaskSubjectErrorMessage("Field is mandatory")
-            setTaskTypeErrorMessage("Field is mandatory")
-            setdateTimeErrorMessage("Field is mandatory")
-            setTaskNameErrorMessage("Field is mandatory")
-            returnVal = false
-        }
+    // const IsFormValid = () => {
+    //     let returnVal = true
+    //     if (taskSubjectId == "0" || taskTypeId == "0"
+    //     && dateTime == "" || taskName == "") {
+    //         setTaskSubjectErrorMessage("Field is mandatory")
+    //         setTaskTypeErrorMessage("Field is mandatory")
+    //         setdateTimeErrorMessage("Field is mandatory")
+    //         setTaskNameErrorMessage("Field is mandatory")
+    //         returnVal = false
+    //     }
 /////////
-        return returnVal
-    }
+    
     const clickSubmit = () => {
         if (IsFormValid()) {
             const AddTaskBody: IAddTaskBody = {
@@ -182,7 +213,7 @@ const AddTask = () => {
                 IsReminder: reminder
             }
             dispatch(AddTaskDetails(AddTaskBody))
-            ClearFormFields();
+            // ClearFormFields();
             // alert("Task Created Successfully")
         }
     }

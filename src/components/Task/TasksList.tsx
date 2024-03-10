@@ -44,12 +44,12 @@ const TasksList = ({ ClickItemList }) => {
                 dispatch(deleteTaskDetails(GetTaskDetailsBody))
             }
         }
-        if (value.Action == "Edit") {
-            navigate("../AddTask/" + value.Id)
-        }
+        // if (value.Action == "Edit") {
+        //     navigate("../AddTask/" + value.Id)
+        // }
         if (value.Action == "Edit") {
             ClickItemList(value.Id)
-            navigate("../" + value.Id)
+            navigate("./" + value.Id)
         }
     }
 
