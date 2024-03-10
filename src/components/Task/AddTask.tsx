@@ -26,6 +26,7 @@ import {getCalendarFormat } from "../Common/Util"
 
 
 const AddTask = () => {
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [Id, setId] = useState('')
@@ -47,6 +48,7 @@ const AddTask = () => {
     //     { Id: 3, Name: 'Assignment', Value: "3" }
     // ]
     // )
+    const [headerMsg,setHearderMsg] = useState("")
     const [taskSubjectId, setTaskSubjectId] = useState("0")
     const [taskTypeId, setTaskTypeId] = useState("0")
     const [taskName, setTask] = useState("")
@@ -60,7 +62,7 @@ const AddTask = () => {
     
     /////
 
-
+    
     useEffect(() => {
         dispatch(getTaskSubjectList())
         dispatch(getTaskTypeList())
@@ -72,7 +74,6 @@ const AddTask = () => {
 
     useEffect(() => {
             if (AddTaskMsg != "") {
-
                 toast.success(AddTaskMsg)
                 dispatch(resetAddTaskDetails())
                 // navigate("../../EmployeeList")
@@ -81,14 +82,6 @@ const AddTask = () => {
             }  
 
     }, [AddTaskMsg])
-
-    // useEffect(() => {
-    //     dispatch(getTaskTypeList())
-    //     // const GetTaskDetailsBody: IGetTaskDetailsBody = {
-    //     //     ID: Number(Id)
-    //     // }
-    //     // dispatch(getTaskDetails(GetTaskDetailsBody))
-    // }, [])
 
     useEffect(() => {
         if (TaskDetails != null) {
@@ -99,6 +92,14 @@ const AddTask = () => {
             setReminder(TaskDetails.IsReminder)
         }
     }, [TaskDetails])
+
+    useEffect(() => {
+        if (Id==="") {
+            setHearderMsg('Add Task');
+        } else {
+            setHearderMsg('Edit Task');
+        }
+    }, [Id]);
     ////////
     const ClearFormFields = () => {
         setTask('')
@@ -131,11 +132,9 @@ const AddTask = () => {
     const handleCheckboxChange = (event) => {
         setReminder(event.target.checked);
     };
-    // const clickSubmit = () => {
-    //     alert("Task Added Successfully")
-    // }
     const clickCancel = () => {
         navigate("/AddTask/")
+        setHearderMsg('Add Task');
         ClearFormFields();
     }
 
@@ -169,19 +168,6 @@ const AddTask = () => {
         return returnVal;
     }
     
-
-    //
-    // const IsFormValid = () => {
-    //     let returnVal = true
-    //     if (taskSubjectId == "0" || taskTypeId == "0"
-    //     && dateTime == "" || taskName == "") {
-    //         setTaskSubjectErrorMessage("Field is mandatory")
-    //         setTaskTypeErrorMessage("Field is mandatory")
-    //         setdateTimeErrorMessage("Field is mandatory")
-    //         setTaskNameErrorMessage("Field is mandatory")
-    //         returnVal = false
-    //     }
-/////////
     
     const clickSubmit = () => {
         if (IsFormValid()) {
@@ -194,8 +180,8 @@ const AddTask = () => {
                 IsReminder: reminder
             }
             dispatch(AddTaskDetails(AddTaskBody))
-            // ClearFormFields();
-            // alert("Task Created Successfully")
+            navigate("/AddTask/")
+            setId('')
         }
     }
     return (
@@ -203,7 +189,7 @@ const AddTask = () => {
             <Grid container direction="column" alignItems="center" justifyContent="center">
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <PageHeader heading={'Add Task'} subheading={''} />
+                        <PageHeader heading={headerMsg} subheading={''} />
                     </Grid>
                     <Grid item xs={12}>
                         <RadioList ItemList={taskSubjectList} Label={'Task Subject'}
