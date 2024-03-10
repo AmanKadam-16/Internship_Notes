@@ -94,7 +94,7 @@ const AddTask = () => {
     }, [TaskDetails])
 
     useEffect(() => {
-        if (Id==="") {
+        if (Id===undefined) {
             setHearderMsg('Add Task');
         } else {
             setHearderMsg('Edit Task');
@@ -181,7 +181,6 @@ const AddTask = () => {
             }
             dispatch(AddTaskDetails(AddTaskBody))
             navigate("/AddTask/")
-            setId('')
         }
     }
     return (
