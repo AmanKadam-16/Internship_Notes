@@ -14,6 +14,9 @@ const Taskslice = createSlice({
         deleteTaskdetailsMsg: '',
         TaskSubjectList: [],
         TaskTypeList: [],
+        CountryList: [],
+        StateList: [],
+        CityList: [],
         Loading: true
     },
     reducers: {
@@ -56,6 +59,19 @@ const Taskslice = createSlice({
             state.Loading = false;
             state.deleteTaskdetailsMsg = "";
         },
+        getCountryList(state, action) {
+            state.Loading = false;
+            state.CountryList = action.payload;
+        },
+        getStateList(state, action) {
+            state.Loading = false;
+            state.StateList = action.payload;
+        },
+        getCityList(state, action) {
+            state.Loading = false;
+            state.CityList = action.payload;
+        },
+
     }
 });
 
@@ -149,5 +165,19 @@ export const resetDeleteTaskDetails =
     (): AppThunk =>
         async (dispatch) => {
             dispatch(Taskslice.actions.resetDeleteTaskDetails());
+        };
+export const getCountryList =
+    (): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.CountryListApi();
+            const responseData = response.data.map((Item, i) => {
+                return {
+                    Id: Item.country_id,
+                    Name: Item.country_name,
+                    Value: Item.country_id.toString()
+                };
+            });
+            dispatch(Taskslice.actions.getCountryList(responseData));
         };
 export default Taskslice.reducer;

@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-
+import DropTask from 'src/components/Task/DropTask';
 import AddEmployee from 'src/components/Employee/AddEmployee';
 import AddTask from 'src/components/Task/AddTask';
 import SuspenseLoader from 'src/layouts/components/SuspenseLoader';
@@ -64,6 +64,10 @@ const AuthenticationRoute = [
     path: 'TasksList',
     element: <TasksList />
   },
+  {
+    path: 'dropTask',
+    element: <DropTask />
+  }
 ];
 
 export default AuthenticationRoute;

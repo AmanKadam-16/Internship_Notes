@@ -1,4 +1,4 @@
-import { IAddTaskBody, IGetTaskDetailsBody } from "src/interfaces/Task/ITask";
+import { IAddTaskBody, IGetDropdownBody, IGetTaskDetailsBody } from "src/interfaces/Task/ITask";
 import http from '../../requests/SchoolService/schoolServices';
 
 
@@ -30,6 +30,19 @@ const AddTaskApi = (data: IAddTaskBody) => {
   const DeleteTaskdetailsApi = (data: IGetTaskDetailsBody) => {
     return http.post<string>('DeleteTasks', data);
   };
+  
+  const CountryListApi = () => {
+    return http.post<IGetDropdownBody[]>('GetCountryList');
+  };
+
+  const StateListApi = (data: IGetDropdownBody) => {
+    return http.post<IGetDropdownBody[]>('GetStateList',data);
+  };
+
+  const CityListApi = (data: IGetDropdownBody) => {
+    return http.post<IGetDropdownBody[]>('GetCityList',data);
+  };
+
 
 const TaskApi = {
     DeleteTaskdetailsApi,
@@ -38,7 +51,11 @@ const TaskApi = {
     GetTaskSubjectListApi,
     GetTaskDetailsApi,
     GetTaskTypeListApi,
-    AddTaskApi
+    AddTaskApi,
+    CountryListApi,
+    StateListApi,
+    CityListApi
+
 }
 
 export default TaskApi;
