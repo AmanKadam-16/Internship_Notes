@@ -7,8 +7,8 @@ import PageHeader from 'src/libraries/heading/PageHeader';
 import { IGetDropdownBody } from 'src/interfaces/Task/ITask';
 import { Container, Grid } from '@mui/material';
 import ButtonField from 'src/libraries/Training/ButtonField';
-const DropTask = () => {
 
+const DropTask = () => {
 
   const countryList = useSelector((state: RootState) => state.Task.CountryList);
   const stateList = useSelector((state: RootState) => state.Task.StateList);
