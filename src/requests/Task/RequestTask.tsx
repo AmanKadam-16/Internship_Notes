@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import TaskApi from "src/api/Task/ApiTask";
-import { IGetTaskDetailsBody, IAddTaskBody } from "src/interfaces/Task/ITask";
+import { IGetTaskDetailsBody, IAddTaskBody, IGetDropdownBody } from "src/interfaces/Task/ITask";
 import { AppThunk } from "src/store";
 
 
@@ -179,5 +179,34 @@ export const getCountryList =
                 };
             });
             dispatch(Taskslice.actions.getCountryList(responseData));
+        };
+export const getStateList =
+    (data: IGetDropdownBody): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.StateListApi(data);
+            const responseData = response.data.map((Item, i) => {
+                return {
+                    Id: Item.state_id,
+                    Name: Item.state_name,
+                    Value: Item.state_id.toString()
+                };
+            });
+            dispatch(Taskslice.actions.getStateList(responseData));
+        };
+
+export const getCityList =
+    (data: IGetDropdownBody): AppThunk =>
+        async (dispatch) => {
+            dispatch(Taskslice.actions.getLoading(true));
+            const response = await TaskApi.CityListApi(data);
+            const responseData = response.data.map((Item, i) => {
+                return {
+                    Id: Item.city_id,
+                    Name: Item.city_name,
+                    Value: Item.city_id.toString()
+                };
+            });
+            dispatch(Taskslice.actions.getCityList(responseData));
         };
 export default Taskslice.reducer;
