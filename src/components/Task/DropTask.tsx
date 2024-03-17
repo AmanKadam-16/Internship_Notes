@@ -5,11 +5,11 @@ import Dropdown from 'src/libraries/Training/Dropdown'
 import { getCountryList, getStateList, getCityList } from 'src/requests/Task/RequestTask';
 import PageHeader from 'src/libraries/heading/PageHeader';
 import { IGetDropdownBody } from 'src/interfaces/Task/ITask';
+import { Container, Grid } from '@mui/material';
+import ButtonField from 'src/libraries/Training/ButtonField';
 const DropTask = () => {
 
-  // const countries = ['Country 1', 'Country 2'];
-  const states = ['State 1', 'State 2'];
-  const cities = ['City 1', 'City 2'];
+
   const countryList = useSelector((state: RootState) => state.Task.CountryList);
   const stateList = useSelector((state: RootState) => state.Task.StateList);
   const cityList = useSelector((state: RootState) => state.Task.CityList);
@@ -25,75 +25,83 @@ const DropTask = () => {
 
 
   useEffect(() => {
-if (country!==''){
-  const IGetDropdownBody : IGetDropdownBody = {
-     country_id: Number(country)
-  }
-  dispatch(getStateList(IGetDropdownBody))
-}
+    if (country !== '') {
+      const IGetDropdownBody: IGetDropdownBody = {
+        country_id: Number(country)
+      }
+      dispatch(getStateList(IGetDropdownBody))
+    }
   }, [country])
 
 
   useEffect(() => {
-    if (state!==''){
-      const IGetDropdownBody : IGetDropdownBody = {
-         state_id: Number(state)
+    if (state !== '') {
+      const IGetDropdownBody: IGetDropdownBody = {
+        state_id: Number(state)
       }
       dispatch(getCityList(IGetDropdownBody))
     }
-      }, [state])
+  }, [state])
 
-  console.log(countryList)
-
-  console.log(stateList)
+  const ClearFormFields = () =>{
+setCountry('')
+setState('')
+setCity('')
+  }
   const clickCountry = (value) => {
     setCountry(value)
   }
 
-  const clickState = (value) =>{
+  const clickState = (value) => {
     setState(value)
-    console.log(value)
   }
 
-  const clickCity = (value) =>{
+  const clickCity = (value) => {
     setCity(value)
-    console.log(value)
+  }
+  const clickSubmit = (value) => {
+    alert('Data Submitted Successfully !')
+    ClearFormFields();
+
   }
   return (
-    <>
-      {/* <div>
- 
-      </div> */}
-      <div>
-        <PageHeader heading='Dropdown Task' />
-      <Dropdown ItemList={countryList} Label={'Country List'}
-          DefaultValue={country} ClickItem={clickCountry}
-          ErrorMessage={undefined} />
+    <Container >
+      <Grid container direction="column" alignItems="center" justifyContent="center">
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <PageHeader heading='Dropdown Task' />
+          </Grid>
+          <Grid item xs={12}>
+            <Dropdown ItemList={countryList} Label={'Country List'}
+              DefaultValue={country} ClickItem={clickCountry}
+              ErrorMessage={undefined} />
+          </Grid>
+          <Grid item xs={12}>
+            {country && (
+              <Dropdown ItemList={stateList} Label={'State List'}
+                DefaultValue={state} ClickItem={clickState}
+                ErrorMessage={undefined} />
+            )}
+          </Grid>
+          <Grid item xs={12}>
 
-         {country && (
-       <Dropdown ItemList={stateList} Label={'State List'}
-       DefaultValue={state} ClickItem={clickState}
-       ErrorMessage={undefined} />
-        )}
+            {state && (
+              <>
+                <Dropdown ItemList={cityList} Label={'City List'}
+                  DefaultValue={city} ClickItem={clickCity}
+                  ErrorMessage={undefined} /> <br /><br />
+                <ButtonField Label={'Submit'} ClickItem={clickSubmit} />
 
-{state && (
-       <Dropdown ItemList={cityList} Label={'City List'}
-       DefaultValue={city} ClickItem={clickCity}
-       ErrorMessage={undefined} />
-        )}
+              </>
 
-        {/* {state && (
-          <select onChange={(e) => setCity(e.target.value)}>
-            <option>Select a city</option>
-            {cities.map((city, index) => (
-              <option key={index} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-        )}  */}
-      </div>
-    </>
+            )}
+
+          </Grid>
+
+
+        </Grid>
+      </Grid>
+    </Container>
 
   );
 }
