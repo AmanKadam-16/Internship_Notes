@@ -15,7 +15,7 @@ import { IAddTaskBody,IGetTaskDetailsBody } from "src/interfaces/Task/ITask"
 import {
     getTaskSubjectList,
     getTaskTypeList,
-    resetAddTaskDetails,
+    resetAddTaskDetails,   
     AddTaskDetails,
     getTasksList,
     getTaskDetails
