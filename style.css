@@ -1,0 +1,200 @@
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.part1 {
+    width: 100%;
+}
+
+#docimage {
+    height: 509px;
+    width: 100%;
+}
+
+.btnn {
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    width: 160px;
+    height: 36px;
+    padding: 3px;
+    border: 2px solid #3FABF3;
+}
+
+#img-container {
+    padding: 5px;
+    outline: 1px solid rgb(210, 208, 208);
+}
+
+#img1 {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.anchor-tag {
+    text-decoration: none;
+    color: #3FABF3;
+}
+
+.a-button {
+    background-color: #F7F7F7;
+    text-decoration: none;
+    color: black;
+    margin: 3px 3px 3px 3px;
+    text-align: center;
+    border-radius: 25px;
+    color: rgb(126, 121, 121);
+}
+
+.card-image {
+    padding: 20px;
+}
+
+.ok {
+    text-decoration: none;
+    background-color: #3FABF3;
+    color: white;
+    border-radius: 1%;
+}
+
+#dropdown {
+    color: #3FABF3;
+    border-color: rgb(126, 121, 121);
+    width: 10%;
+    border-radius: 25%;
+}
+
+.card-part1 {
+    padding: 35px 0px 0px 20px;
+    font-size: 14px;
+    color: rgb(126, 121, 121);
+}
+
+.card-part2 {
+    text-align: center;
+    width: 10;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.btnview-more {
+    width: 65%;
+    border-radius: 5px;
+    padding: 5px;
+    border-color: #3FABF3;
+    background-color: white;
+    font-size: 14px;
+}
+
+.square {
+    height: 55px;
+    width: 35px;
+    border: 1px solid #333;
+}
+
+.heart {
+    font-size: 48px;
+}
+
+.card-part3 {
+    padding: 0px 20px 20px 30px;
+    font-size: 14px;
+}
+
+.hover-btn:hover {
+    background-color: #3FABF3;
+    color: white;
+}
+
+.btn {
+    color: black;
+    border-color: #3FABF3;
+    text-decoration: none;
+}
+
+.squares--heart {
+    height: 30px;
+    width: 35px;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.hert-img {
+    height: 20px;
+}
+
+.squares--heart:hover {
+    border-color: red;
+}
+
+.btnview-more:hover {
+    background-color: #3FABF3;
+    color: white;
+}
+
+.navvv>button {
+    color: #767676
+}
+
+.navvv>button:hover {
+    color: #767676;
+}
+
+.navvv .nav-link.active {
+    color: white;
+    background-color: #3FABF3;
+}
+
+.card {
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.getdir-button {
+    border-radius: 5px;
+    color: black;
+    width: 160px;
+    height: 36px;
+    padding: 3px;
+    border: 2px solid #3FABF3;
+    text-decoration: none;
+}
+
+.getdir-button:hover {
+    background-color: #3FABF3;
+    color: white;
+}
+
+.getdirection {
+    text-align: center;
+}
+
+.part2 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.part2 p {
+    font-size: 14px;
+}
+
+.part2 .card1,
+.part2 .card2 {
+    width: 45%;
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .part2 .card1,
+    .part2 .card2 {
+        width: 100%;
+    }
+}
