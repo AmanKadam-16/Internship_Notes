@@ -1,2 +1,2 @@
 # Code _ RED
-## " Why Have Intellience When One can Have Artificial Intelligence ! "
+## " Why Have Intelligence When One can Have Artificial Intelligence ! "
