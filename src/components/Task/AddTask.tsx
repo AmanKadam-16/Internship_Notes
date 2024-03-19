@@ -93,7 +93,9 @@ const AddTask = () => {
             setTaskTypeId(TaskDetails.TaskTypeId)
             setReminder(TaskDetails.IsReminder)
         }
+        console.log(TaskDetails)
     }, [TaskDetails])
+
 
     // useEffect(() => {
     //     if (Id==='') {
