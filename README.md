@@ -1,3 +1,4 @@
+```sql
 create database enquiryForm;
 
 
@@ -54,13 +55,18 @@ motherPhone varchar(20),
 address varchar(100),
 societyName varchar(50),
 email varchar(50),
-refClass int foreign key references class(classId) null,
+refClass int foreign key references class(classId),
 refStatus int foreign key references status(statusId) null,
 refReminder int foreign key references reminder(reminderId) null,
-comment varchar(255) null
+comment varchar(255) null,
+imageData VARBINARY(MAX) null
 );
 
 select * from studentInfo;
 
-insert into studentInfo(studentName,birthDate,studentAge,fatherName,fatherPhone,motherName,motherPhone,address,societyName,email) values('John Doe','2002-11-15',21,'Jake Doe','1597536842','Jenny Doe','9637412458',
-'New York East 4/2','Prime Society','johndoe@gmail.com');
+insert into studentInfo(studentName,birthDate,studentAge,fatherName,fatherPhone,motherName,motherPhone,address,societyName,email,refClass) values('John Doe','2002-11-15',21,'Jake Doe','1597536842','Jenny Doe','9637412458',
+'New York East 4/2','Prime Society','johndoe@gmail.com',1);
+```
+
+
+
