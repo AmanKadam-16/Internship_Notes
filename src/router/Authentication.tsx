@@ -4,6 +4,7 @@ import DropTask from 'src/components/Task/DropTask';
 import AddEmployee from 'src/components/Employee/AddEmployee';
 import AddTask from 'src/components/Task/AddTask';
 import SuspenseLoader from 'src/layouts/components/SuspenseLoader';
+import FollowUpForm from 'src/components/FollowUp/FollowUpForm';
 const Loader = (Component) => (props) =>
 (
   <Suspense fallback={<SuspenseLoader />}>
@@ -29,7 +30,7 @@ const Home = Loader(
 
 const AuthenticationRoute = [
   {
-    path: '/',
+    path: '/Adt',
     element: <Navigate to="AddTask" replace />
   },
   {
@@ -67,6 +68,10 @@ const AuthenticationRoute = [
   {
     path: 'dropTask',
     element: <DropTask />
+  },
+  {
+    path: '/',
+    element: <FollowUpForm />
   }
 ];
 

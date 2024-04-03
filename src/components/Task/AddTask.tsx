@@ -74,6 +74,7 @@ const AddTask = () => {
     }, [Id])
 
     useEffect(() => {
+        console.log("Hi im here")
             if (AddTaskMsg != "") {
                 toast.success(AddTaskMsg)
                 dispatch(resetAddTaskDetails())
