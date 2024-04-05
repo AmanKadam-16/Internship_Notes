@@ -10,7 +10,7 @@ import Dropdown from "src/libraries/Training/Dropdown"
 import InputField from "src/libraries/Training/InputField"
 import RadioList from "src/libraries/Training/RadioList"
 import PageHeader from "src/libraries/heading/PageHeader"
-import { AddStudentDetails, getClass } from "src/requests/Enquiry/RequestEnquiryList"
+import { AddStudentDetails, getClass, resetAddEnquiryDetails } from "src/requests/Enquiry/RequestEnquiryList"
 import { RootState } from "src/store"
 import { IsEmailValid, IsPhoneNoValid, calculateAge } from "../Common/Util"
 
@@ -34,6 +34,7 @@ const AddEnquiry = () => {
     const [SocietyName, setSocietyName] = useState('')
     const [EmailId, setEmailId] = useState('')
 
+    const [ClassErrorMessage, setClassErrorMessage] =  useState('')
     const [StudentNameErrorMessage, setStudentNameErrorMessage] = useState('')
     const [BirthDateErrorMessage, setBirthDateErrorMessage] = useState('')
     const [GenderErrorMessage, setGenderErrorMessage] = useState('')
@@ -56,7 +57,8 @@ const AddEnquiry = () => {
 
     useEffect(() => {
         if (AddStudentMsg !== '') {
-            toast.success(AddStudentMsg)
+            toast.success(AddStudentMsg);
+            dispatch(resetAddEnquiryDetails);
             // navigate("/")
 
         }
@@ -85,10 +87,12 @@ const AddEnquiry = () => {
 
 
     const clickClass = (value) => {
-        setClassID(value)
+        setClassID(value);
+        setClassErrorMessage("");
     }
     const clickStudentName = (value) => {
-        setStudentName(value)
+        setStudentName(value);
+        setStudentNameErrorMessage("");
     }
     // const clickBirthDate = (value) => {
     //     setBirthDate(value)
@@ -111,6 +115,22 @@ const AddEnquiry = () => {
             setAge(calculateAge(value).toString());
         }
     };
+    const clickCancel = () => {
+        setClassID('')
+        setStudentName('')
+        setBirthDate('')
+        setAge('')
+        setGenderErrorMessage('')
+        setGender('')
+        setFatherName('')
+        setFatherPhoneNo('')
+        setMotherName('')
+        setMotherPhoneNo('')
+        setStudentAddress('')
+        setSocietyName('')
+        setEmailId('')
+        setEmailIdErrorMessage('')
+    }
 
 
     const clickAge = () => {
@@ -118,85 +138,121 @@ const AddEnquiry = () => {
     };
 
     const clickGender = (value) => {
-        setGender(value)
+        setGender(value);
+        setGenderErrorMessage("");
     }
     const clickFatherName = (value) => {
-        setFatherName(value)
+        setFatherName(value);
+        setFatherNameErrorMessage("");
     }
 
     const clickFatherPhoneNo = (value) => {
         // true if its a number, false if not & cannot enter more than 10 digit
         if (!isNaN(+value) && value.length < 11)
-            setFatherPhoneNo(value)
+            setFatherPhoneNo(value);
+        setFatherPhoneNoErrorMessage("");
     }
     const clickMotherName = (value) => {
-        setMotherName(value)
+        setMotherName(value);
+        setMotherNameErrorMessage("");
     }
     const clickMotherPhoneNo = (value) => {
         // true if its a number, false if not & cannot enter more than 10 digit
         if (!isNaN(+value) && value.length < 11)
-            setMotherPhoneNo(value)
+            setMotherPhoneNo(value);
+        setMotherPhoneNoErrorMessage("");
     }
     const clickStudentAddress = (value) => {
-        setStudentAddress(value)
+        setStudentAddress(value);
+        setStudentAddressErrorMessage("");
     }
     const clickSocietyName = (value) => {
-        setSocietyName(value)
+        setSocietyName(value);
+        setSocietyNameErrorMessage("");
     }
     const clickEmailId = (value) => {
-        setEmailId(value)
+        setEmailId(value);
+        setEmailIdErrorMessage("");
     }
 
-    const BlurPhoneNo = () => {
+    const BlurFatherPhoneNo = () => {
         setFatherPhoneNoErrorMessage(IsPhoneNoValid(FatherPhoneNo))
-        setMotherPhoneNoErrorMessage(IsPhoneNoValid(MotherPhoneNo))
+    }
+    const BlurMotherPhoneNo = () => {
+        setMotherPhoneNoErrorMessage(IsPhoneNoValid(FatherPhoneNo))
     }
     const BlurEmailId = () => {
-        setEmailIdErrorMessage(IsEmailValid(EmailId))
+        setEmailIdErrorMessage(IsEmailValid(EmailId.trim()))
     }
     console.log(Class)
 
     const IsFormValid = () => {
         let returnVal = true
-        if (StudentName == "") {
+        if (ClassID == "0"){
+            setClassErrorMessage("Please select student's class")
+            returnVal = false
+        }else{
+            setClassErrorMessage("")
+        }
+        if (StudentName === "") {
             setStudentNameErrorMessage("Please enter student's name")
             returnVal = false
+        }else{
+            setStudentNameErrorMessage("");
         }
         if (BirthDate == "") {
             setBirthDateErrorMessage("Please enter student's Birthdate")
             returnVal = false
+        }else{
+            setBirthDateErrorMessage("");
         }
         if (Gender == "0") {
             setGenderErrorMessage("Please select gender")
             returnVal = false
+        }else{
+            setGenderErrorMessage("");
         }
         if (FatherName == "") {
             setFatherNameErrorMessage("Please enter Father name")
             returnVal = false
+        }else{
+            setFatherNameErrorMessage("");
         }
-        if (FatherPhoneNoErrorMessage != "" && FatherPhoneNo == "") {
+        if (FatherPhoneNo == "") {
             setFatherPhoneNoErrorMessage("Please enter valid phone number")
             returnVal = false
+        }else{
+            setFatherPhoneNoErrorMessage("");
         }
         if (MotherName == "") {
             setMotherNameErrorMessage("Please enter Mother name")
             returnVal = false
+        }else{
+            setMotherNameErrorMessage("");
         }
-        if (MotherPhoneNoErrorMessage != "" && MotherPhoneNo == "") {
+        if ( MotherPhoneNo == "") {
             setMotherPhoneNoErrorMessage("Please enter valid phone number")
             returnVal = false
+        }else{
+            setMotherPhoneNoErrorMessage("");
         }
         if (StudentAddress == "") {
             setStudentAddressErrorMessage("Please enter Residential Address")
             returnVal = false
+        }else{
+            setStudentAddressErrorMessage("");
         }
         if (SocietyName == "") {
             setSocietyNameErrorMessage("Please enter Society Name")
             returnVal = false
+        }else{
+            setSocietyNameErrorMessage("");
         }
-        if (EmailIdErrorMessage != "" && EmailId == "") {
+        if (EmailId == "") {
             setEmailIdErrorMessage("Please enter valid email-id")
             returnVal = false
+        }else{
+            setEmailIdErrorMessage("");
         }
         return returnVal
     }
@@ -217,7 +273,7 @@ const AddEnquiry = () => {
                 MotherPhoneNo: MotherPhoneNo,
                 StudentAddress: StudentAddress,
                 SocietyName: SocietyName,
-                EmailId: EmailId
+                EmailId: EmailId.trim()
 
             }
             dispatch(AddStudentDetails(AddStudentBody))
@@ -250,7 +306,7 @@ const AddEnquiry = () => {
                     <Grid item xs={12}>
                         <Dropdown ItemList={Class} Label={'Class'}
                             DefaultValue={ClassID}
-                            ClickItem={clickClass} />
+                            ClickItem={clickClass} Placeholder={'Select Class'}  ErrorMessage={ClassErrorMessage} />
                     </Grid>
                     <Grid item xs={12}>
                         <InputField Item={StudentName} Label={'Student Name'}
@@ -286,7 +342,7 @@ const AddEnquiry = () => {
                                 <InputField Item={FatherPhoneNo} Label={'Phone No.'}
                                     ClickItem={clickFatherPhoneNo}
                                     ErrorMessage={FatherPhoneNoErrorMessage}
-                                    BlurItem={BlurPhoneNo} />
+                                    BlurItem={BlurFatherPhoneNo} />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -301,7 +357,7 @@ const AddEnquiry = () => {
                                 <InputField Item={MotherPhoneNo} Label={'Phone No.'}
                                     ClickItem={clickMotherPhoneNo}
                                     ErrorMessage={MotherPhoneNoErrorMessage}
-                                    BlurItem={BlurPhoneNo} />
+                                    BlurItem={BlurMotherPhoneNo} />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -331,7 +387,7 @@ const AddEnquiry = () => {
                                 <ButtonField Label={'Submit'} ClickItem={clickSubmit} />
                             </Grid>
                             <Grid item xs={2}>
-                                <ButtonField Label={'Cancel'} ClickItem={undefined} />
+                                <ButtonField Label={'Cancel'} ClickItem={clickCancel} />
                             </Grid>
                         </Grid>
                     </Grid>

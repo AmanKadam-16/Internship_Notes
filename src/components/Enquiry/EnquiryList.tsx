@@ -52,7 +52,7 @@ const EnquiryList = () => {
                 </Grid>
                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography variant="body2">
-                        Enquiry List {startIndex}-{endIndex} of {totalCount} Enquiry
+                        Enquiry List {startIndex}-{endIndex} of {totalCount} Enquiries
                     </Typography>
                     <div>
                         <Button onClick={handlePrevPage} variant="outlined" disabled={pageIndex === 0}>
