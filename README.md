@@ -1,6 +1,6 @@
 # Enquiry Feature code
-- Enquiry Form
+- Enquiry Form (Development Completed)  baseurl+/AddEnquiry
 - Student Details 
-   - Enquiry List
+   - Enquiry List (Development Completed)  baseurl+/
    - Admission List
    - Follows Up
