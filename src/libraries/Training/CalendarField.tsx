@@ -5,7 +5,7 @@ const CalendarField = ({ Item, ClickItem, Label, ErrorMessage = '' }) => {
     return (<>
         <Typography>{Label}</Typography>
         <TextField value={Item} type='date'
-            onChange={(e) => { ClickItem(e.target.value) }}/>
+            onChange={(e) => { ClickItem(e.target.value) }} size='small' />
         <ErrorDetail>{ErrorMessage}</ErrorDetail>
     </>)
 }
