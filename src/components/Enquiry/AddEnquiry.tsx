@@ -53,7 +53,7 @@ const AddEnquiry = () => {
 
     useEffect(() => {
         dispatch(getClass())
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (AddStudentMsg !== '') {
@@ -63,29 +63,7 @@ const AddEnquiry = () => {
             // navigate("/")
 
         }
-    }, [AddStudentMsg])
-    // const AddStudentBody: IAddStudentBody = {
-    //     ClassID: 1,
-    //     StudentName: "Amit",
-    //     Birthdate: "1-1-2000",
-    //     Age: 12,
-    //     Gender: 1,
-    //     FatherName: "Amit",
-    //     FatherPhoneNo: "1223344556",
-    //     MotherName: "Amit",
-    //     MotherPhoneNo: "6554433221",
-    //     StudentAddress: "ASD",
-    //     SocietyName: "xyz",
-    //     EmailId: "mailto:amit@gmail.com",
-    //     ClassName: "",
-    //     CID: 0
-    // }
-    // useEffect(() => {
-    //     dispatch(AddStudentDetails(AddStudentBody))
-    // }, [])
-
-
-
+    }, [AddStudentMsg]);
 
     const clickClass = (value) => {
         setClassID(value);
@@ -95,10 +73,7 @@ const AddEnquiry = () => {
         setStudentName(value);
         setStudentNameErrorMessage("");
     }
-    // const clickBirthDate = (value) => {
-    //     setBirthDate(value)
-    //     setAge(calculateAge(value).toString());
-    // }
+
     const clickBirthDate = (value) => {
         const selectedDate = new Date(value);
         const currentDate = new Date();
@@ -190,7 +165,7 @@ const AddEnquiry = () => {
         setFatherPhoneNoErrorMessage(IsPhoneNoValid(FatherPhoneNo))
     }
     const BlurMotherPhoneNo = () => {
-        setMotherPhoneNoErrorMessage(IsPhoneNoValid(FatherPhoneNo))
+        setMotherPhoneNoErrorMessage(IsPhoneNoValid(MotherPhoneNo))
     }
     const BlurEmailId = () => {
         setEmailIdErrorMessage(IsEmailValid(EmailId.trim()))
