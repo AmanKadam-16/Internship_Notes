@@ -293,23 +293,8 @@ const AddEnquiry = () => {
 
     }
 
-    // const clickCancel = () => {
-    //     setStudentName(''),
-    //         setBirthDate(''),
-    //         setAge(''),
-    //         setGender('0'),
-    //         setFatherName(''),
-    //         setFatherPhoneNo(''),
-    //         setMotherName(''),
-    //         setMotherPhoneNo(''),
-    //         setStudentAddress(''),
-    //         setSocietyName(''),
-    //         setEmailId('')
-    // }  
-
-
     return (
-        <Container maxWidth="md" sx={{ py: 4 }}>
+        <Container maxWidth="md" sx={{ py: 6 }}>
             <Card variant="outlined">
                 <Box p={3}>
                     <Typography variant="h2" gutterBottom align="center">
@@ -318,7 +303,6 @@ const AddEnquiry = () => {
                     <Divider />
                     <form>
                         <Grid container spacing={2} sx={{ mt: 2 }} >
-
                             <Grid item xs={6} sm={6}>
                                 <InputField
                                     Item={StudentName}
@@ -330,7 +314,7 @@ const AddEnquiry = () => {
                             <Grid item xs={6} sm={6}>
                                 <Dropdown
                                     ItemList={Class}
-                                    Label="Class"
+                                    Label=""
                                     DefaultValue={ClassID}
                                     ClickItem={clickClass}
                                     Placeholder="Select Class"
@@ -370,7 +354,7 @@ const AddEnquiry = () => {
                                     Label="Email Id"
                                     ClickItem={clickEmailId}
                                     ErrorMessage={EmailIdErrorMessage}
-                                    BlurItem={BlurEmailId} 
+                                    BlurItem={BlurEmailId}
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -387,7 +371,7 @@ const AddEnquiry = () => {
                                     Label="Phone No."
                                     ClickItem={clickFatherPhoneNo}
                                     ErrorMessage={FatherPhoneNoErrorMessage}
-                                    BlurItem={BlurFatherPhoneNo} 
+                                    BlurItem={BlurFatherPhoneNo}
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -395,7 +379,7 @@ const AddEnquiry = () => {
                                     Item={MotherName}
                                     Label="Mother Name"
                                     ClickItem={clickMotherName}
-                                    ErrorMessage={MotherNameErrorMessage} 
+                                    ErrorMessage={MotherNameErrorMessage}
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -404,7 +388,7 @@ const AddEnquiry = () => {
                                     Label="Phone No."
                                     ClickItem={clickMotherPhoneNo}
                                     ErrorMessage={MotherPhoneNoErrorMessage}
-                                    BlurItem={BlurMotherPhoneNo} 
+                                    BlurItem={BlurMotherPhoneNo}
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -412,7 +396,7 @@ const AddEnquiry = () => {
                                     Item={StudentAddress}
                                     Label="Address"
                                     ClickItem={clickStudentAddress}
-                                    ErrorMessage={StudentAddressErrorMessage} 
+                                    ErrorMessage={StudentAddressErrorMessage}
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -420,7 +404,7 @@ const AddEnquiry = () => {
                                     Item={SocietyName}
                                     Label="Society Name"
                                     ClickItem={clickSocietyName}
-                                    ErrorMessage={SocietyNameErrorMessage} 
+                                    ErrorMessage={SocietyNameErrorMessage}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -428,7 +412,7 @@ const AddEnquiry = () => {
                                     sx={{
                                         display: 'flex',
                                         justifyContent: 'center',
-                                        gap: 6,
+                                        gap: 6
                                     }}>
                                     <ButtonField Label="Submit" ClickItem={clickSubmit} />
                                     <ButtonField Label="Cancel" ClickItem={clickCancel} />

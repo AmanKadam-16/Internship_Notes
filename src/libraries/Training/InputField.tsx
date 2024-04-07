@@ -10,7 +10,7 @@ const InputField = ({ Item, Label, ErrorMessage = ''
             onChange={(e) => { ClickItem(e.target.value) }}
             onBlur={BlurItem} size='small'
             label={Label} variant="outlined" 
-            fullWidth required/>
+            fullWidth required />
         <ErrorDetail>{ErrorMessage}</ErrorDetail>
     </>
     )
