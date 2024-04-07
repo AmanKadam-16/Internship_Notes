@@ -9,7 +9,7 @@ const InputField = ({ Item, Label, ErrorMessage = ''
         <TextField value={Item}
             onChange={(e) => { ClickItem(e.target.value) }}
             onBlur={BlurItem} size='small' 
-            label={Label} variant="outlined" required/>
+            label={Label} variant="outlined" required fullWidth />
         <ErrorDetail>{ErrorMessage}</ErrorDetail>
     </>
     )
