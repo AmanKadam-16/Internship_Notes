@@ -44,9 +44,9 @@ const EnquiryList = () => {
     return (
         <Container>
             <Grid container spacing={2} sx={{ width: '100%', overflow: 'hidden' }}>
-                <Grid item xs={12}>
-                    <PageHeader heading={'Enquiry List'} subheading={''} />
-                </Grid>
+            <Typography variant="h3" gutterBottom >
+                        Enquiry List
+                    </Typography>
                 <Grid item xs={12} sx={{ height: '450px', overflow: 'auto' }}>
                     <DynamicList HeaderList={HeaderList} ItemList={paginatedList} IconList={IconList} ClickItem={undefined} />
                 </Grid>

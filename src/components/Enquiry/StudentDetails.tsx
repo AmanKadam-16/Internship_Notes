@@ -6,6 +6,7 @@ import InputField from "src/libraries/Training/InputField"
 import RadioList from "src/libraries/Training/RadioList"
 import PageHeader from "src/libraries/heading/PageHeader"
 import EnquiryList from './EnquiryList'
+import { Typography } from '@mui/material'
 
 const AddClass = () => {
     
@@ -16,7 +17,7 @@ const enquiryList = [{ Id: 1, Name: "Enquiry List", Value: "1" },
 const [toggleId, setToggleId] = useState('1');
 
 const clickToggle = (value)=>{
-    setToggleId(value);
+    // setToggleId(value);
 };
   return (
    <>
@@ -25,11 +26,12 @@ const clickToggle = (value)=>{
         <Grid container direction="column" alignItems="center" justifyContent="center">
             <Grid container spacing={2}>
                 <Grid item xs={12} sx={{ mt: "30px" }} display={'flex'}  justifyContent={'center'}>
-                    <PageHeader heading={'Student Detail'} subheading={''} />
-                </Grid>
+                <Typography variant="h2" gutterBottom >
+                        Student Details
+                    </Typography></Grid>
                 <Grid item xs={12} style={{ textAlign: 'right' }}>
                     <RadioList ItemList={enquiryList} Label={''}
-                        DefaultValue={toggleId} ClickItem={undefined}
+                        DefaultValue={toggleId} ClickItem={clickToggle}
                         ErrorMessage={undefined} />
                 </Grid>
             </Grid>

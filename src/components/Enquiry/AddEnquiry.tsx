@@ -1,25 +1,25 @@
-import { Container, Grid } from "@mui/material"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { IAddEnquiryBody } from "src/interfaces/Enquiry/IEnquiry"
-import ButtonField from "src/libraries/Training/ButtonField"
-import CalendarField from "src/libraries/Training/CalendarField"
-import Dropdown from "src/libraries/Training/Dropdown"
-import InputField from "src/libraries/Training/InputField"
-import RadioList from "src/libraries/Training/RadioList"
-import PageHeader from "src/libraries/heading/PageHeader"
-import { AddStudentDetails, getClass, resetAddEnquiryDetails } from "src/requests/Enquiry/RequestEnquiryList"
-import { RootState } from "src/store"
-import { IsEmailValid, IsPhoneNoValid, calculateAge } from "../Common/Util"
+import { Box, Card, Container, Grid, Typography, Divider } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { IAddEnquiryBody } from "src/interfaces/Enquiry/IEnquiry";
+import ButtonField from "src/libraries/Training/ButtonField";
+import CalendarField from "src/libraries/Training/CalendarField";
+import Dropdown from "src/libraries/Training/Dropdown";
+import InputField from "src/libraries/Training/InputField";
+import RadioList from "src/libraries/Training/RadioList";
+import { AddStudentDetails, getClass, resetAddEnquiryDetails } from "src/requests/Enquiry/RequestEnquiryList";
+import { RootState } from "src/store";
+import { IsEmailValid, IsPhoneNoValid, calculateAge } from "../Common/Util";
+import PageHeader from "src/libraries/heading/PageHeader";
 
 const AddEnquiry = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [ClassID, setClassID] = useState('0')
     const [StudentName, setStudentName] = useState('')
-    const [Age, setAge] = useState('')
+    const [Age, setAge] = useState('0')
     const [BirthDate, setBirthDate] = useState('')
     const [GenderList, setGenderList] = useState([
         { Id: 1, Name: 'Male', Value: "1" },
@@ -34,7 +34,7 @@ const AddEnquiry = () => {
     const [SocietyName, setSocietyName] = useState('')
     const [EmailId, setEmailId] = useState('')
 
-    const [ClassErrorMessage, setClassErrorMessage] =  useState('')
+    const [ClassErrorMessage, setClassErrorMessage] = useState('')
     const [StudentNameErrorMessage, setStudentNameErrorMessage] = useState('')
     const [BirthDateErrorMessage, setBirthDateErrorMessage] = useState('')
     const [GenderErrorMessage, setGenderErrorMessage] = useState('')
@@ -59,6 +59,7 @@ const AddEnquiry = () => {
         if (AddStudentMsg !== '') {
             toast.success(AddStudentMsg);
             dispatch(resetAddEnquiryDetails);
+            clickCancel();
             // navigate("/")
 
         }
@@ -116,12 +117,11 @@ const AddEnquiry = () => {
         }
     };
     const clickCancel = () => {
-        setClassID('')
+        setClassID('0')
         setStudentName('')
         setBirthDate('')
         setAge('')
-        setGenderErrorMessage('')
-        setGender('')
+        setGender('0')
         setFatherName('')
         setFatherPhoneNo('')
         setMotherName('')
@@ -130,6 +130,17 @@ const AddEnquiry = () => {
         setSocietyName('')
         setEmailId('')
         setEmailIdErrorMessage('')
+        setSocietyNameErrorMessage('')
+        setStudentAddressErrorMessage('')
+        setMotherPhoneNoErrorMessage('')
+        setMotherNameErrorMessage('')
+        setFatherPhoneNoErrorMessage('')
+        setFatherNameErrorMessage('')
+        setBirthDateErrorMessage('')
+        setGenderErrorMessage('')
+        setStudentNameErrorMessage('')
+        setClassErrorMessage('')
+
     }
 
 
@@ -188,70 +199,70 @@ const AddEnquiry = () => {
 
     const IsFormValid = () => {
         let returnVal = true
-        if (ClassID == "0"){
+        if (ClassID === "0") {
             setClassErrorMessage("Please select student's class")
             returnVal = false
-        }else{
+        } else {
             setClassErrorMessage("")
         }
         if (StudentName === "") {
             setStudentNameErrorMessage("Please enter student's name")
             returnVal = false
-        }else{
+        } else {
             setStudentNameErrorMessage("");
         }
         if (BirthDate == "") {
             setBirthDateErrorMessage("Please enter student's Birthdate")
             returnVal = false
-        }else{
+        } else {
             setBirthDateErrorMessage("");
         }
-        if (Gender == "0") {
+        if (Gender === "0") {
             setGenderErrorMessage("Please select gender")
             returnVal = false
-        }else{
+        } else {
             setGenderErrorMessage("");
         }
         if (FatherName == "") {
             setFatherNameErrorMessage("Please enter Father name")
             returnVal = false
-        }else{
+        } else {
             setFatherNameErrorMessage("");
         }
         if (FatherPhoneNo == "") {
             setFatherPhoneNoErrorMessage("Please enter valid phone number")
             returnVal = false
-        }else{
+        } else {
             setFatherPhoneNoErrorMessage("");
         }
         if (MotherName == "") {
             setMotherNameErrorMessage("Please enter Mother name")
             returnVal = false
-        }else{
+        } else {
             setMotherNameErrorMessage("");
         }
-        if ( MotherPhoneNo == "") {
+        if (MotherPhoneNo == "") {
             setMotherPhoneNoErrorMessage("Please enter valid phone number")
             returnVal = false
-        }else{
+        } else {
             setMotherPhoneNoErrorMessage("");
         }
         if (StudentAddress == "") {
             setStudentAddressErrorMessage("Please enter Residential Address")
             returnVal = false
-        }else{
+        } else {
             setStudentAddressErrorMessage("");
         }
         if (SocietyName == "") {
             setSocietyNameErrorMessage("Please enter Society Name")
             returnVal = false
-        }else{
+        } else {
             setSocietyNameErrorMessage("");
         }
         if (EmailId == "") {
             setEmailIdErrorMessage("Please enter valid email-id")
             returnVal = false
-        }else{
+        } else {
             setEmailIdErrorMessage("");
         }
         return returnVal
@@ -294,108 +305,135 @@ const AddEnquiry = () => {
     //         setStudentAddress(''),
     //         setSocietyName(''),
     //         setEmailId('')
-    // }
+    // }  
+
 
     return (
-        <Container  >
-            <Grid container direction="column" alignItems="center" justifyContent="center">
-                <Grid container spacing={2}>
-                    <Grid item xs={12} >
-                        <PageHeader heading={'Enquiry Form'} subheading={''} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Dropdown ItemList={Class} Label={'Class'}
-                            DefaultValue={ClassID}
-                            ClickItem={clickClass} Placeholder={'Select Class'}  ErrorMessage={ClassErrorMessage} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <InputField Item={StudentName} Label={'Student Name'}
-                            ClickItem={clickStudentName}
-                            ErrorMessage={StudentNameErrorMessage} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <CalendarField Item={BirthDate} Label={'Birth Date'}
+        <Container maxWidth="md" sx={{ py: 4 }}>
+            <Card variant="outlined">
+                <Box p={3}>
+                    <Typography variant="h2" gutterBottom align="center">
+                        Enquiry Form
+                    </Typography>
+                    <Divider />
+                    <form>
+                        <Grid container spacing={2} sx={{ mt: 2 }} >
+
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={StudentName}
+                                    Label="Student Name"
+                                    ClickItem={clickStudentName}
+                                    ErrorMessage={StudentNameErrorMessage}
+                                />
+                            </Grid>
+                            <Grid item xs={6} sm={6}>
+                                <Dropdown
+                                    ItemList={Class}
+                                    Label="Class"
+                                    DefaultValue={ClassID}
+                                    ClickItem={clickClass}
+                                    Placeholder="Select Class"
+                                    ErrorMessage={ClassErrorMessage}
+                                />
+                            </Grid>
+                            <Grid item xs={6} sm={6}>
+                                <CalendarField
+                                    Item={BirthDate}
+                                    Label="Birth Date *"
                                     ClickItem={clickBirthDate}
-                                    ErrorMessage={BirthDateErrorMessage} />
+                                    ErrorMessage={BirthDateErrorMessage}
+                                /> <br /> {BirthDate && <Typography>Student Age {Age} Years</Typography>}
+
                             </Grid>
-                            <Grid item xs={2}>
-                                <InputField Item={Age} Label={'Age'} ClickItem={clickAge} />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <RadioList ItemList={GenderList} Label={'Gender'}
+
+                            <Grid item xs={6} sm={6}>
+                                <RadioList
+                                    ItemList={GenderList}
+                                    Label="Gender *"
                                     DefaultValue={Gender}
                                     ClickItem={clickGender}
-                                    ErrorMessage={GenderErrorMessage} />
+                                    ErrorMessage={GenderErrorMessage}
+                                />
                             </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <InputField Item={FatherName} Label={'Father Name'}
+
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={FatherName}
+                                    Label="Father Name"
                                     ClickItem={clickFatherName}
-                                    ErrorMessage={FatherNameErrorMessage} />
+                                    ErrorMessage={FatherNameErrorMessage}
+                                    
+                                />
                             </Grid>
-                            <Grid item xs={2}>
-                                <InputField Item={FatherPhoneNo} Label={'Phone No.'}
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={FatherPhoneNo}
+                                    Label="Phone No."
                                     ClickItem={clickFatherPhoneNo}
                                     ErrorMessage={FatherPhoneNoErrorMessage}
-                                    BlurItem={BlurFatherPhoneNo} />
+                                    BlurItem={BlurFatherPhoneNo}
+                                />
                             </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <InputField Item={MotherName} Label={'Mother Name'}
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={MotherName}
+                                    Label="Mother Name"
                                     ClickItem={clickMotherName}
-                                    ErrorMessage={MotherNameErrorMessage} />
+                                    ErrorMessage={MotherNameErrorMessage}
+                                />
                             </Grid>
-                            <Grid item xs={2}>
-                                <InputField Item={MotherPhoneNo} Label={'Phone No.'}
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={MotherPhoneNo}
+                                    Label="Phone No."
                                     ClickItem={clickMotherPhoneNo}
                                     ErrorMessage={MotherPhoneNoErrorMessage}
-                                    BlurItem={BlurMotherPhoneNo} />
+                                    BlurItem={BlurMotherPhoneNo}
+                                />
                             </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <InputField Item={StudentAddress} Label={'Address'}
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={StudentAddress}
+                                    Label="Address"
                                     ClickItem={clickStudentAddress}
-                                    ErrorMessage={StudentAddressErrorMessage} />
+                                    ErrorMessage={StudentAddressErrorMessage}
+                                />
                             </Grid>
-                            <Grid item xs={2}>
-                                <InputField Item={SocietyName} Label={'Society Name'}
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={SocietyName}
+                                    Label="Society Name"
                                     ClickItem={clickSocietyName}
-                                    ErrorMessage={SocietyNameErrorMessage} />
+                                    ErrorMessage={SocietyNameErrorMessage}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <InputField
+                                    Item={EmailId}
+                                    Label="Email Id"
+                                    ClickItem={clickEmailId}
+                                    ErrorMessage={EmailIdErrorMessage}
+                                    BlurItem={BlurEmailId}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        gap: 6,
+                                    }}>
+                                    <ButtonField Label="Submit" ClickItem={clickSubmit} />
+                                    <ButtonField Label="Cancel" ClickItem={clickCancel} />
+                                </Box>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <InputField Item={EmailId} Label={'Email Id'}
-                            ClickItem={clickEmailId}
-                            ErrorMessage={EmailIdErrorMessage}
-                            BlurItem={BlurEmailId} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <ButtonField Label={'Submit'} ClickItem={clickSubmit} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ButtonField Label={'Cancel'} ClickItem={clickCancel} />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-
-                </Grid>
-            </Grid>
+                    </form>
+                </Box>
+            </Card>
         </Container>
-    )
+    );
 }
 
-export default AddEnquiry
+export default AddEnquiry;
