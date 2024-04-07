@@ -19,7 +19,7 @@ const AddEnquiry = () => {
     const navigate = useNavigate();
     const [ClassID, setClassID] = useState('0')
     const [StudentName, setStudentName] = useState('')
-    const [Age, setAge] = useState('0')
+    const [Age, setAge] = useState('')
     const [BirthDate, setBirthDate] = useState('')
     const [GenderList, setGenderList] = useState([
         { Id: 1, Name: 'Male', Value: "1" },
@@ -343,7 +343,7 @@ const AddEnquiry = () => {
                                     Label="Birth Date *"
                                     ClickItem={clickBirthDate}
                                     ErrorMessage={BirthDateErrorMessage}
-                                /> <br /> {BirthDate && <Typography>Student Age {Age} Years</Typography>}
+                                />
 
                             </Grid>
 
@@ -356,14 +356,29 @@ const AddEnquiry = () => {
                                     ErrorMessage={GenderErrorMessage}
                                 />
                             </Grid>
-
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={Age}
+                                    Label="Student's Age"
+                                    ClickItem={clickAge}
+                                    ErrorMessage={undefined}
+                                />
+                            </Grid>
+                            <Grid item xs={6} sm={6}>
+                                <InputField
+                                    Item={EmailId}
+                                    Label="Email Id"
+                                    ClickItem={clickEmailId}
+                                    ErrorMessage={EmailIdErrorMessage}
+                                    BlurItem={BlurEmailId} 
+                                />
+                            </Grid>
                             <Grid item xs={6} sm={6}>
                                 <InputField
                                     Item={FatherName}
                                     Label="Father Name"
                                     ClickItem={clickFatherName}
                                     ErrorMessage={FatherNameErrorMessage}
-                                    
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -372,7 +387,7 @@ const AddEnquiry = () => {
                                     Label="Phone No."
                                     ClickItem={clickFatherPhoneNo}
                                     ErrorMessage={FatherPhoneNoErrorMessage}
-                                    BlurItem={BlurFatherPhoneNo}
+                                    BlurItem={BlurFatherPhoneNo} 
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -380,7 +395,7 @@ const AddEnquiry = () => {
                                     Item={MotherName}
                                     Label="Mother Name"
                                     ClickItem={clickMotherName}
-                                    ErrorMessage={MotherNameErrorMessage}
+                                    ErrorMessage={MotherNameErrorMessage} 
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -389,7 +404,7 @@ const AddEnquiry = () => {
                                     Label="Phone No."
                                     ClickItem={clickMotherPhoneNo}
                                     ErrorMessage={MotherPhoneNoErrorMessage}
-                                    BlurItem={BlurMotherPhoneNo}
+                                    BlurItem={BlurMotherPhoneNo} 
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -397,7 +412,7 @@ const AddEnquiry = () => {
                                     Item={StudentAddress}
                                     Label="Address"
                                     ClickItem={clickStudentAddress}
-                                    ErrorMessage={StudentAddressErrorMessage}
+                                    ErrorMessage={StudentAddressErrorMessage} 
                                 />
                             </Grid>
                             <Grid item xs={6} sm={6}>
@@ -405,16 +420,7 @@ const AddEnquiry = () => {
                                     Item={SocietyName}
                                     Label="Society Name"
                                     ClickItem={clickSocietyName}
-                                    ErrorMessage={SocietyNameErrorMessage}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <InputField
-                                    Item={EmailId}
-                                    Label="Email Id"
-                                    ClickItem={clickEmailId}
-                                    ErrorMessage={EmailIdErrorMessage}
-                                    BlurItem={BlurEmailId}
+                                    ErrorMessage={SocietyNameErrorMessage} 
                                 />
                             </Grid>
                             <Grid item xs={12}>
