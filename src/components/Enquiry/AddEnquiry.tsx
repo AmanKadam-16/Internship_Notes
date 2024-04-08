@@ -77,13 +77,13 @@ const AddEnquiry = () => {
     const clickBirthDate = (value) => {
         const selectedDate = new Date(value);
         const currentDate = new Date();
-        const twoYearsAgo = new Date(currentDate.getFullYear() - 2, currentDate.getMonth(), currentDate.getDate());
+        const twoYearsAgo = new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDate());
 
         // Check if the selected date is in the future
         if (selectedDate > currentDate) {
             setBirthDateErrorMessage("Birth date cannot be in the future");
         } else if (selectedDate > twoYearsAgo) {
-            setBirthDateErrorMessage("Child must be at least 2 years old");
+            setBirthDateErrorMessage("Child must be at least 1 years old");
         } else {
             // Clear error message if the selected date is valid
             setBirthDateErrorMessage("");
