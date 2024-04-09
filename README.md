@@ -1,3 +1,4 @@
+### Note * : To Remove CORS error Simply install this package - (Install-Package Microsoft.AspNet.WebApi.Cors)
 # [Figma Design Link (click to view)](https://www.figma.com/file/np1WeeAJ7t0Zgk0BAz7AT0/Untitled-(Copy)?type=design&node-id=0%3A1&mode=design&t=fxSa1C5BQR8Tsi0d-1)
 # Enquiry Feature code
 - Enquiry Form (Development Completed)  baseurl+/AddEnquiry
